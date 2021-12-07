@@ -1,11 +1,10 @@
-import PathUtils from "../pathUtils";
-
 import {app, BrowserWindow, globalShortcut, clipboard, Tray, Menu} from "electron";
 import * as robot from "robotjs";
-import * as path from "path";
 import {TomatoPlugin} from "./scripts/tomato";
+import PathUtils from "../pathUtils";
 
 const {resolve} = require('path');
+
 function createWindow(): void {
     const win = new BrowserWindow({
         center: true,
@@ -36,6 +35,7 @@ function createWindow(): void {
         });
     }
 }
+
 let tray;
 let tomatoPlugin;
 app.whenReady().then(() => {
@@ -43,12 +43,12 @@ app.whenReady().then(() => {
     tray = new Tray(PathUtils.resolvePath( "icons/a.png"));
     tomatoPlugin = new TomatoPlugin(tray);
     const contextMenu = Menu.buildFromTemplate([
-        {label: '开始番茄', type: 'normal', click: ()=>tomatoPlugin.startLockTimer()},
+        {label: '开始番茄', type: 'normal', click: () => tomatoPlugin.startLockTimer()},
         {label: '退出', type: 'normal', click: () => app.quit()}
     ]);
     tray.setContextMenu(contextMenu);
     globalShortcut.register('CommandOrControl+B', () => {
-        robot.keyTap('c', 'command');
+        robot.keyTap('c', process.platform === "darwin" ? 'command' : "control");
     });
     // 单独唤醒时创建window
     // app.on('activate', () => {

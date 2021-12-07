@@ -1,10 +1,34 @@
-import PathUtils from "../pathUtils";
-import { app, BrowserWindow, globalShortcut, Tray, Menu } from "electron";
-import * as robot from "robotjs";
-import { TomatoPlugin } from "./scripts/tomato";
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const electron_1 = require("electron");
+const robot = __importStar(require("robotjs"));
+const tomato_1 = require("./scripts/tomato");
+const pathUtils_1 = __importDefault(require("../pathUtils"));
 const { resolve } = require('path');
 function createWindow() {
-    const win = new BrowserWindow({
+    const win = new electron_1.BrowserWindow({
         center: true,
         width: 1366,
         height: 800,
@@ -36,17 +60,17 @@ function createWindow() {
 }
 let tray;
 let tomatoPlugin;
-app.whenReady().then(() => {
+electron_1.app.whenReady().then(() => {
     // createWindow();
-    tray = new Tray(PathUtils.resolvePath("icons/a.png"));
-    tomatoPlugin = new TomatoPlugin(tray);
-    const contextMenu = Menu.buildFromTemplate([
+    tray = new electron_1.Tray(pathUtils_1.default.resolvePath("icons/a.png"));
+    tomatoPlugin = new tomato_1.TomatoPlugin(tray);
+    const contextMenu = electron_1.Menu.buildFromTemplate([
         { label: '开始番茄', type: 'normal', click: () => tomatoPlugin.startLockTimer() },
-        { label: '退出', type: 'normal', click: () => app.quit() }
+        { label: '退出', type: 'normal', click: () => electron_1.app.quit() }
     ]);
     tray.setContextMenu(contextMenu);
-    globalShortcut.register('CommandOrControl+B', () => {
-        robot.keyTap('c', 'command');
+    electron_1.globalShortcut.register('CommandOrControl+B', () => {
+        robot.keyTap('c', process.platform === "darwin" ? 'command' : "control");
     });
     // 单独唤醒时创建window
     // app.on('activate', () => {
@@ -55,8 +79,8 @@ app.whenReady().then(() => {
     //     }
     // })
 });
-app.on('window-all-closed', () => {
+electron_1.app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
-        app.quit();
+        electron_1.app.quit();
     }
 });
