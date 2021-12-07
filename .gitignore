@@ -3,6 +3,7 @@ dist/electron/*
 dist/web/*
 build/*
 packages/render-build/*
+packages/preload/**/*.js
 packages/main/**/*.js
 !build/icons
 node_modules/
