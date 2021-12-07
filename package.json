@@ -31,15 +31,17 @@
   "build": {
     "productName": "工具包",
     "copyright": "By a lonely man",
-    "asar": false,
+    "extraResources": [
+      {
+        "from": "icons/",
+        "to": "icons/"
+      }
+    ],
     "directories": {
       "output": "build"
     },
     "win": {
       "icon": "icon.png"
-    },
-    "nisi": {
-      "allowToChangeInstallationDirectory": true
     }
   }
 }

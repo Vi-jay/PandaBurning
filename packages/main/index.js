@@ -1,10 +1,9 @@
-"use strict";
-exports.__esModule = true;
-var electron_1 = require("electron");
-var robot = require("robotjs");
-var resolve = require('path').resolve;
+import PathUtils from "../pathUtils";
+import { app, BrowserWindow, Tray, Menu } from "electron";
+import { TomatoPlugin } from "./scripts/tomato";
+const { resolve } = require('path');
 function createWindow() {
-    var win = new electron_1.BrowserWindow({
+    const win = new BrowserWindow({
         center: true,
         width: 1366,
         height: 800,
@@ -25,19 +24,26 @@ function createWindow() {
     win.setAspectRatio(1366 / 800);
     if (process.env.NODE_ENV === 'development') {
         // @ts-ignore
-        win.loadURL(process.env.VITE_DEV_SERVER_URL).then(function () {
+        win.loadURL(process.env.VITE_DEV_SERVER_URL).then(() => {
             win.webContents.openDevTools();
         });
     }
     else {
-        win.loadFile(resolve(__dirname, '../render-build/index.html')).then(function () { });
+        win.loadFile(resolve(__dirname, '../render-build/index.html')).then(() => {
+        });
     }
 }
-electron_1.app.whenReady().then(function () {
-    createWindow();
-    electron_1.globalShortcut.register('CommandOrControl+B', function () {
-        robot.keyTap('c', 'command');
-    });
+let tray;
+let tomatoPlugin;
+app.whenReady().then(() => {
+    // createWindow();
+    tray = new Tray(PathUtils.resolvePath("icons/icon.png"));
+    tomatoPlugin = new TomatoPlugin(tray);
+    const contextMenu = Menu.buildFromTemplate([
+        { label: '开始番茄', type: 'normal', click: () => tomatoPlugin.startLockTimer() },
+        { label: '退出', type: 'normal', click: () => app.quit() }
+    ]);
+    tray.setContextMenu(contextMenu);
     // 单独唤醒时创建window
     // app.on('activate', () => {
     //     if (BrowserWindow.getAllWindows().length === 0) {
@@ -45,8 +51,8 @@ electron_1.app.whenReady().then(function () {
     //     }
     // })
 });
-electron_1.app.on('window-all-closed', function () {
+app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
-        electron_1.app.quit();
+        app.quit();
     }
 });
