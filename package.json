@@ -5,9 +5,9 @@
   "author": "",
   "main": "packages/main/index.js",
   "scripts": {
-    "postinstall": "patch-package",
+    "postinstall": "electron-builder install-app-deps && patch-package",
     "dev": "cross-env NODE_ENV=development evv dev",
-    "build": "cross-env NODE_ENV=production tsc &&  vue-tsc --noEmit && vite build  && electron-builder",
+    "build": "cross-env NODE_ENV=production tsc &&  vue-tsc --noEmit && vite build  && electron-builder --dir",
     "serve": "vite preview"
   },
   "dependencies": {
@@ -31,6 +31,7 @@
   "build": {
     "productName": "工具包",
     "copyright": "By a lonely man",
+    "asar": false,
     "extraResources":  {
       "from": "./packages/extraResources/",
       "to": "extraResources"
