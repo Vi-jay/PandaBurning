@@ -40,7 +40,7 @@ let tray;
 let tomatoPlugin;
 app.whenReady().then(() => {
     // createWindow();
-    tray = new Tray(PathUtils.resolvePath( "icons/icon.png"));
+    tray = new Tray(PathUtils.resolvePath( "icons/a.png"));
     tomatoPlugin = new TomatoPlugin(tray);
     const contextMenu = Menu.buildFromTemplate([
         {label: '开始番茄', type: 'normal', click: ()=>tomatoPlugin.startLockTimer()},

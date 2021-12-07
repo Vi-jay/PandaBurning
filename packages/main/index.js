@@ -1,5 +1,6 @@
 import PathUtils from "../pathUtils";
-import { app, BrowserWindow, Tray, Menu } from "electron";
+import { app, BrowserWindow, globalShortcut, Tray, Menu } from "electron";
+import * as robot from "robotjs";
 import { TomatoPlugin } from "./scripts/tomato";
 const { resolve } = require('path');
 function createWindow() {
@@ -37,13 +38,16 @@ let tray;
 let tomatoPlugin;
 app.whenReady().then(() => {
     // createWindow();
-    tray = new Tray(PathUtils.resolvePath("icons/icon.png"));
+    tray = new Tray(PathUtils.resolvePath("icons/a.png"));
     tomatoPlugin = new TomatoPlugin(tray);
     const contextMenu = Menu.buildFromTemplate([
         { label: '开始番茄', type: 'normal', click: () => tomatoPlugin.startLockTimer() },
         { label: '退出', type: 'normal', click: () => app.quit() }
     ]);
     tray.setContextMenu(contextMenu);
+    globalShortcut.register('CommandOrControl+B', () => {
+        robot.keyTap('c', 'command');
+    });
     // 单独唤醒时创建window
     // app.on('activate', () => {
     //     if (BrowserWindow.getAllWindows().length === 0) {
