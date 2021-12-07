@@ -39,7 +39,6 @@ let tray;
 let tomatoPlugin;
 app.whenReady().then(() => {
     // createWindow();
-    fs.writeFileSync("/Users/vijay/Documents/GitHub/evv-project/log.txt", PathUtils.resolvePath("a.png"));
     tray = new Tray(PathUtils.resolvePath("a.png"));
     tomatoPlugin = new TomatoPlugin(tray);
     const contextMenu = Menu.buildFromTemplate([

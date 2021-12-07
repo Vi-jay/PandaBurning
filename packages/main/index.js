@@ -71,6 +71,8 @@ electron_1.app.whenReady().then(() => {
         { label: '退出', type: 'normal', click: () => electron_1.app.quit() }
     ]);
     tray.setContextMenu(contextMenu);
+    if (process.platform === "darwin")
+        electron_1.app.dock.hide();
     electron_1.globalShortcut.register('CommandOrControl+B', () => {
         robot.keyTap('c', process.platform === "darwin" ? 'command' : "control");
     });
