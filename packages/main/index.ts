@@ -48,7 +48,7 @@ app.whenReady().then(() => {
     ]);
     tray.setContextMenu(contextMenu);
     globalShortcut.register('CommandOrControl+B', () => {
-        robot.keyTap('c', 'command');
+        robot.keyTap('c', process.platform === "darwin" ? 'command' : "control");
     });
     // 单独唤醒时创建window
     // app.on('activate', () => {

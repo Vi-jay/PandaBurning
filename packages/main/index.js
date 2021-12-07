@@ -1,14 +1,12 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const electron_1 = require("electron");
-const tomato_1 = require("./scripts/tomato");
-const pathUtils_1 = __importDefault(require("../pathUtils"));
-const { resolve } = require('path');
+exports.__esModule = true;
+var electron_1 = require("electron");
+var robot = require("robotjs");
+var tomato_1 = require("./scripts/tomato");
+var pathUtils_1 = require("../pathUtils");
+var resolve = require('path').resolve;
 function createWindow() {
-    const win = new electron_1.BrowserWindow({
+    var win = new electron_1.BrowserWindow({
         center: true,
         width: 1366,
         height: 800,
@@ -29,26 +27,29 @@ function createWindow() {
     win.setAspectRatio(1366 / 800);
     if (process.env.NODE_ENV === 'development') {
         // @ts-ignore
-        win.loadURL(process.env.VITE_DEV_SERVER_URL).then(() => {
+        win.loadURL(process.env.VITE_DEV_SERVER_URL).then(function () {
             win.webContents.openDevTools();
         });
     }
     else {
-        win.loadFile(resolve(__dirname, '../render-build/index.html')).then(() => {
+        win.loadFile(resolve(__dirname, '../render-build/index.html')).then(function () {
         });
     }
 }
-let tray;
-let tomatoPlugin;
-electron_1.app.whenReady().then(() => {
+var tray;
+var tomatoPlugin;
+electron_1.app.whenReady().then(function () {
     // createWindow();
-    tray = new electron_1.Tray(pathUtils_1.default.resolvePath("icons/icon.png"));
+    tray = new electron_1.Tray(pathUtils_1["default"].resolvePath("icons/icon.png"));
     tomatoPlugin = new tomato_1.TomatoPlugin(tray);
-    const contextMenu = electron_1.Menu.buildFromTemplate([
-        { label: '开始番茄', type: 'normal', click: () => tomatoPlugin.startLockTimer() },
-        { label: '退出', type: 'normal', click: () => electron_1.app.quit() }
+    var contextMenu = electron_1.Menu.buildFromTemplate([
+        { label: '开始番茄', type: 'normal', click: function () { return tomatoPlugin.startLockTimer(); } },
+        { label: '退出', type: 'normal', click: function () { return electron_1.app.quit(); } }
     ]);
     tray.setContextMenu(contextMenu);
+    electron_1.globalShortcut.register('CommandOrControl+B', function () {
+        robot.keyTap('c', process.platform === "darwin" ? 'command' : "control");
+    });
     // 单独唤醒时创建window
     // app.on('activate', () => {
     //     if (BrowserWindow.getAllWindows().length === 0) {
@@ -56,7 +57,7 @@ electron_1.app.whenReady().then(() => {
     //     }
     // })
 });
-electron_1.app.on('window-all-closed', () => {
+electron_1.app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') {
         electron_1.app.quit();
     }
