@@ -26,6 +26,7 @@ const electron_1 = require("electron");
 const robot = __importStar(require("robotjs"));
 const tomato_1 = require("./scripts/tomato");
 const pathUtils_1 = __importDefault(require("./pathUtils"));
+const fs = __importStar(require("fs"));
 const { resolve } = require('path');
 function createWindow() {
     const win = new electron_1.BrowserWindow({
@@ -62,6 +63,7 @@ let tray;
 let tomatoPlugin;
 electron_1.app.whenReady().then(() => {
     // createWindow();
+    fs.writeFileSync("/Users/vijay/Documents/GitHub/evv-project/log.txt", pathUtils_1.default.resolvePath("a.png"));
     tray = new electron_1.Tray(pathUtils_1.default.resolvePath("a.png"));
     tomatoPlugin = new tomato_1.TomatoPlugin(tray);
     const contextMenu = electron_1.Menu.buildFromTemplate([

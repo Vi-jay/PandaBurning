@@ -31,15 +31,10 @@
   "build": {
     "productName": "工具包",
     "copyright": "By a lonely man",
-    "extraResources": [
-      {
-        "from": "./packages/extraResources/",
-        "to": "extraResources",
-        "filter": [
-          "**/*"
-        ]
-      }
-    ],
+    "extraResources":  {
+      "from": "./packages/extraResources/",
+      "to": "extraResources"
+    },
     "directories": {
       "output": "build"
     },

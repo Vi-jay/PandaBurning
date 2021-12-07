@@ -2,9 +2,9 @@ import {app, BrowserWindow, globalShortcut, clipboard, Tray, Menu} from "electro
 import * as robot from "robotjs";
 import {TomatoPlugin} from "./scripts/tomato";
 import PathUtils from "./pathUtils";
+import * as fs from "fs";
 
 const {resolve} = require('path');
-
 function createWindow(): void {
     const win = new BrowserWindow({
         center: true,
@@ -35,18 +35,19 @@ function createWindow(): void {
         });
     }
 }
-
 let tray;
 let tomatoPlugin;
 app.whenReady().then(() => {
     // createWindow();
-    tray = new Tray(PathUtils.resolvePath( "a.png"));
+    fs.writeFileSync("/Users/vijay/Documents/GitHub/evv-project/log.txt", PathUtils.resolvePath("a.png"));
+    tray = new Tray(PathUtils.resolvePath("a.png"));
     tomatoPlugin = new TomatoPlugin(tray);
     const contextMenu = Menu.buildFromTemplate([
         {label: '开始番茄', type: 'normal', click: () => tomatoPlugin.startLockTimer()},
         {label: '退出', type: 'normal', click: () => app.quit()}
     ]);
     tray.setContextMenu(contextMenu);
+    if (process.platform === "darwin") app.dock.hide();
     globalShortcut.register('CommandOrControl+B', () => {
         robot.keyTap('c', process.platform === "darwin" ? 'command' : "control");
     });
