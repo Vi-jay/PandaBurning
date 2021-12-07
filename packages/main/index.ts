@@ -1,4 +1,5 @@
-const { app, BrowserWindow } = require('electron');
+import {app, BrowserWindow, globalShortcut,clipboard} from "electron";
+import * as robot from "robotjs";
 const { resolve } = require('path');
 
 function createWindow(): void {
@@ -22,6 +23,7 @@ function createWindow(): void {
     });
     win.setAspectRatio(1366 / 800);
     if (process.env.NODE_ENV === 'development') {
+        // @ts-ignore
         win.loadURL(process.env.VITE_DEV_SERVER_URL).then(() => {
             win.webContents.openDevTools();
         })
@@ -31,12 +33,16 @@ function createWindow(): void {
 }
 
 app.whenReady().then(() => {
-    createWindow()
-    app.on('activate', () => {
-        if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow();
-        }
-    })
+    createWindow();
+    globalShortcut.register('CommandOrControl+B', () => {
+        robot.keyTap('c', 'command');
+    });
+    // 单独唤醒时创建window
+    // app.on('activate', () => {
+    //     if (BrowserWindow.getAllWindows().length === 0) {
+    //         createWindow();
+    //     }
+    // })
 })
 
 app.on('window-all-closed', () => {

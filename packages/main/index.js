@@ -1,8 +1,10 @@
 "use strict";
-const { app, BrowserWindow } = require('electron');
-const { resolve } = require('path');
+exports.__esModule = true;
+var electron_1 = require("electron");
+var robot = require("robotjs");
+var resolve = require('path').resolve;
 function createWindow() {
-    const win = new BrowserWindow({
+    var win = new electron_1.BrowserWindow({
         center: true,
         width: 1366,
         height: 800,
@@ -22,24 +24,29 @@ function createWindow() {
     });
     win.setAspectRatio(1366 / 800);
     if (process.env.NODE_ENV === 'development') {
-        win.loadURL(process.env.VITE_DEV_SERVER_URL).then(() => {
+        // @ts-ignore
+        win.loadURL(process.env.VITE_DEV_SERVER_URL).then(function () {
             win.webContents.openDevTools();
         });
     }
     else {
-        win.loadFile(resolve(__dirname, '../render-build/index.html')).then(() => { });
+        win.loadFile(resolve(__dirname, '../render-build/index.html')).then(function () { });
     }
 }
-app.whenReady().then(() => {
+electron_1.app.whenReady().then(function () {
     createWindow();
-    app.on('activate', () => {
-        if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow();
-        }
+    electron_1.globalShortcut.register('CommandOrControl+B', function () {
+        robot.keyTap('c', 'command');
     });
+    // 单独唤醒时创建window
+    // app.on('activate', () => {
+    //     if (BrowserWindow.getAllWindows().length === 0) {
+    //         createWindow();
+    //     }
+    // })
 });
-app.on('window-all-closed', () => {
+electron_1.app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') {
-        app.quit();
+        electron_1.app.quit();
     }
 });
