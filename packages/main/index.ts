@@ -1,7 +1,7 @@
 import {app, BrowserWindow, globalShortcut, clipboard, Tray, Menu} from "electron";
 import * as robot from "robotjs";
 import {TomatoPlugin} from "./scripts/tomato";
-import PathUtils from "../pathUtils";
+import PathUtils from "./pathUtils";
 
 const {resolve} = require('path');
 
@@ -40,7 +40,7 @@ let tray;
 let tomatoPlugin;
 app.whenReady().then(() => {
     // createWindow();
-    tray = new Tray(PathUtils.resolvePath( "icons/a.png"));
+    tray = new Tray(PathUtils.resolvePath( "a.png"));
     tomatoPlugin = new TomatoPlugin(tray);
     const contextMenu = Menu.buildFromTemplate([
         {label: '开始番茄', type: 'normal', click: () => tomatoPlugin.startLockTimer()},

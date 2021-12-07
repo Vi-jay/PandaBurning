@@ -33,8 +33,11 @@
     "copyright": "By a lonely man",
     "extraResources": [
       {
-        "from": "icons/",
-        "to": "icons/"
+        "from": "./packages/extraResources/",
+        "to": "extraResources",
+        "filter": [
+          "**/*"
+        ]
       }
     ],
     "directories": {

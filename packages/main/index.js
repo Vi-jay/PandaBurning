@@ -25,7 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const electron_1 = require("electron");
 const robot = __importStar(require("robotjs"));
 const tomato_1 = require("./scripts/tomato");
-const pathUtils_1 = __importDefault(require("../pathUtils"));
+const pathUtils_1 = __importDefault(require("./pathUtils"));
 const { resolve } = require('path');
 function createWindow() {
     const win = new electron_1.BrowserWindow({
@@ -62,7 +62,7 @@ let tray;
 let tomatoPlugin;
 electron_1.app.whenReady().then(() => {
     // createWindow();
-    tray = new electron_1.Tray(pathUtils_1.default.resolvePath("icons/a.png"));
+    tray = new electron_1.Tray(pathUtils_1.default.resolvePath("a.png"));
     tomatoPlugin = new tomato_1.TomatoPlugin(tray);
     const contextMenu = electron_1.Menu.buildFromTemplate([
         { label: '开始番茄', type: 'normal', click: () => tomatoPlugin.startLockTimer() },
