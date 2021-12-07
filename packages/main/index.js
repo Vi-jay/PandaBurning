@@ -1,9 +1,14 @@
-import PathUtils from "../pathUtils";
-import { app, BrowserWindow, Tray, Menu } from "electron";
-import { TomatoPlugin } from "./scripts/tomato";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const electron_1 = require("electron");
+const tomato_1 = require("./scripts/tomato");
+const pathUtils_1 = __importDefault(require("../pathUtils"));
 const { resolve } = require('path');
 function createWindow() {
-    const win = new BrowserWindow({
+    const win = new electron_1.BrowserWindow({
         center: true,
         width: 1366,
         height: 800,
@@ -35,13 +40,13 @@ function createWindow() {
 }
 let tray;
 let tomatoPlugin;
-app.whenReady().then(() => {
+electron_1.app.whenReady().then(() => {
     // createWindow();
-    tray = new Tray(PathUtils.resolvePath("icons/icon.png"));
-    tomatoPlugin = new TomatoPlugin(tray);
-    const contextMenu = Menu.buildFromTemplate([
+    tray = new electron_1.Tray(pathUtils_1.default.resolvePath("icons/icon.png"));
+    tomatoPlugin = new tomato_1.TomatoPlugin(tray);
+    const contextMenu = electron_1.Menu.buildFromTemplate([
         { label: '开始番茄', type: 'normal', click: () => tomatoPlugin.startLockTimer() },
-        { label: '退出', type: 'normal', click: () => app.quit() }
+        { label: '退出', type: 'normal', click: () => electron_1.app.quit() }
     ]);
     tray.setContextMenu(contextMenu);
     // 单独唤醒时创建window
@@ -51,8 +56,8 @@ app.whenReady().then(() => {
     //     }
     // })
 });
-app.on('window-all-closed', () => {
+electron_1.app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
-        app.quit();
+        electron_1.app.quit();
     }
 });
