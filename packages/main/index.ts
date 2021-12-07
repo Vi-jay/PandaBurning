@@ -47,6 +47,9 @@ app.whenReady().then(() => {
         {label: '退出', type: 'normal', click: () => app.quit()}
     ]);
     tray.setContextMenu(contextMenu);
+    globalShortcut.register('CommandOrControl+B', () => {
+        robot.keyTap('c', 'command');
+    });
     // 单独唤醒时创建window
     // app.on('activate', () => {
     //     if (BrowserWindow.getAllWindows().length === 0) {
