@@ -14,11 +14,11 @@
     "evv": "script/evv.js"
   },
   "dependencies": {
-    "@types/puppeteer": "^5.4.4",
-    "axios": "^0.24.0",
     "puppeteer": "^13.0.0",
     "puppeteer-extra": "^3.2.3",
     "puppeteer-extra-plugin-stealth": "^2.9.0",
+    "@types/puppeteer": "^5.4.4",
+    "axios": "^0.24.0",
     "qs": "^6.10.2",
     "robotjs": "^0.6.0",
     "vant": "3",
@@ -36,7 +36,7 @@
     "patch-package": "^6.4.7",
     "sass": "latest",
     "typescript": "4.2.3",
-    "vite": "^2.1.5"
+    "vite": "2.5.10"
   },
   "build": {
     "productName": "工具包",
