@@ -4,7 +4,7 @@ import {resolve} from "path";
 import {IS_DEV, TOMATO__SEC} from "../config";
 
 export class TomatoPlugin {
-    tray!:Tray;
+    tray!: Tray;
     resetTimer: any = null;
     intervalTimer: any = null;
     leftSec: number = TOMATO__SEC;
@@ -53,6 +53,7 @@ export class TomatoPlugin {
         tomatoWin.setWindowButtonVisibility(false);
         //禁止关闭窗口 关闭时自动隐藏 始终保持只有一个番茄窗口
         tomatoWin.on('close', event => {
+            if (!tomatoWin)return;
             event.preventDefault(); //阻止command+q关闭窗口
             tomatoWin.hide();
         })
@@ -78,7 +79,12 @@ export class TomatoPlugin {
         const contextMenu = Menu.buildFromTemplate([
             {label: '开始番茄', type: 'normal', click: resetTomato},
             {label: '重置番茄', type: 'normal', click: resetTomato},
-            {label: '退出', type: 'normal', click: this.closeTomatoWindow.bind(this)}
+            {
+                label: '退出', type: 'normal', click: () => {
+                    this.closeTomatoWindow();
+                    app.quit();
+                }
+            }
         ]);
         tray.on("click", (e, bound) => {
             eventBoundPosition = bound;

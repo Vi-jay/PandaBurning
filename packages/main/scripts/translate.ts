@@ -55,6 +55,7 @@ export class TranslatePlugin {
         translateWin.setWindowButtonVisibility(false);
         //禁止关闭窗口 关闭时自动隐藏 始终保持只有一个番茄窗口
         translateWin.on('close', event => {
+            if (!translateWin)return;
             event.preventDefault(); //阻止command+q关闭窗口
             translateWin.hide();
         })
