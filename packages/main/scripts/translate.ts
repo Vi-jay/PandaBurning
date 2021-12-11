@@ -20,10 +20,12 @@ let browser!: Browser;
 
 export class TranslatePlugin {
     translateWin!: BrowserWindow;
+
     constructor() {
         this.initPuppeteer();
         this.setupTranslateWindow();
     }
+
     setupTranslateWindow(): void {
         let translateWin = this.translateWin;
         if (translateWin) {
@@ -40,6 +42,8 @@ export class TranslatePlugin {
             titleBarStyle: "hidden",
             center: true,
             show: false,
+            frame: false,
+            useContentSize: true,
             ...windowSize,
             vibrancy: 'hud',  // 'light', 'medium-light' etc
             autoHideMenuBar: process.env.MODE !== 'development',
@@ -52,10 +56,10 @@ export class TranslatePlugin {
                 nativeWindowOpen: false
             }
         });
-        translateWin.setWindowButtonVisibility(false);
+        translateWin.setWindowButtonVisibility && translateWin.setWindowButtonVisibility(false);
         //禁止关闭窗口 关闭时自动隐藏 始终保持只有一个番茄窗口
         translateWin.on('close', event => {
-            if (!translateWin)return;
+            if (!translateWin) return;
             event.preventDefault(); //阻止command+q关闭窗口
             translateWin.hide();
         })
@@ -74,11 +78,13 @@ export class TranslatePlugin {
             });
         }
     }
+
     closeTranslateWindow() {
         const translateWin = this.translateWin;
         this.translateWin = null;
         translateWin.close()
     }
+
     async initPuppeteer() {
         browser = await puppeteer.launch({headless: true});
         await this.initPages();
@@ -91,6 +97,7 @@ export class TranslatePlugin {
             return this.initPages();
         })
     }
+
     async initPages() {
         translatePage = await browser.newPage();
         reverseTranslatePage = await browser.newPage();
@@ -107,6 +114,7 @@ export class TranslatePlugin {
         // botPage.goto("https://quillbot.com/");
         // botPage.exposeFunction('pGetUri', pGetUri);
     }
+
     setupShortcut() {
         const pasteHandle = () => robot.keyTap('v', process.platform === "darwin" ? 'command' : "control");
         const copyHandle = () => robot.keyTap('c', process.platform === "darwin" ? 'command' : "control");
@@ -149,7 +157,7 @@ export class TranslatePlugin {
             await reverseTranslatePage.evaluate(() => document.execCommand('selectall', false, null));
             await reverseTranslatePage.keyboard.press('Backspace');
             //    write2Window
-            this.translateWin.setSize(text.length * 18+8, 50);
+            this.translateWin.setSize(text.length * 18 + 8, 50);
             this.setupTranslateWindow();
             this.translateWin.webContents.send("translate", "show", text);
         });

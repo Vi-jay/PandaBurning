@@ -20,5 +20,6 @@ onUnmounted(() => {
 <style>
 #app {
   height: 100%;
+  background: black;
 }
 </style>

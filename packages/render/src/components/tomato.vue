@@ -11,7 +11,7 @@ import {Ref} from "@vue/reactivity";
 import {CountDownInstance} from "vant";
 
 const tomatoSec = ref(0);
-const countDown:Ref<CountDownInstance> = ref(null);
+const countDown: Ref<CountDownInstance> = ref(null);
 onMounted(() => {
   window["ipcRenderer"].on("tomato", (event, eventName, totalSec) => {
     if (eventName === "start") {
@@ -32,6 +32,7 @@ onUnmounted(() => {
 #Tomato {
   color: white;
   height: 100%;
+  @include flex-center;
   --van-count-down-font-size: 30px;
 }
 </style>

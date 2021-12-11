@@ -50,7 +50,7 @@ export class TomatoPlugin {
                 nativeWindowOpen: false
             }
         });
-        tomatoWin.setWindowButtonVisibility(false);
+        tomatoWin.setWindowButtonVisibility&&tomatoWin.setWindowButtonVisibility(false);
         //禁止关闭窗口 关闭时自动隐藏 始终保持只有一个番茄窗口
         tomatoWin.on('close', event => {
             if (!tomatoWin)return;
