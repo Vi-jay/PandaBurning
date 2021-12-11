@@ -1,7 +1,8 @@
-import {app, BrowserWindow, dialog, ipcMain, ipcRenderer, Menu, powerMonitor, Tray} from "electron";
+import {app, BrowserWindow, dialog, ipcMain, ipcRenderer, Menu, powerMonitor, shell, Tray} from "electron";
 import * as robot from "robotjs";
 import {resolve} from "path";
 import {IS_DEV, TOMATO__SEC} from "../config";
+import {execSync} from "child_process"
 
 export class TomatoPlugin {
     tray!: Tray;
@@ -9,21 +10,23 @@ export class TomatoPlugin {
     intervalTimer: any = null;
     leftSec: number = TOMATO__SEC;
     tomatoWin: BrowserWindow;
+
     constructor(tray) {
         this.tray = tray;
         this.initTray(tray);
         this.setupTomatoWindow();
         powerMonitor.on("unlock-screen", () => this.startLockTimer())
     }
+
     closeTomatoWindow() {
         const tomatoWin = this.tomatoWin;
         this.tomatoWin = null;
-        tomatoWin.close()
+        tomatoWin && tomatoWin.close()
     }
+
     setupTomatoWindow(position: { x: number, y: number } = {x: 0, y: 0}): void {
         let tomatoWin = this.tomatoWin;
         if (tomatoWin) {
-            tomatoWin.setPosition(position.x - 50, position.y)
             tomatoWin.restore()
             return tomatoWin.show();
         }
@@ -32,11 +35,10 @@ export class TomatoPlugin {
             height: IS_DEV ? 500 : 220
         };
         this.tomatoWin = tomatoWin = new BrowserWindow({
-            x: position.x,
-            y: position.y,
             titleBarStyle: "hidden",
             center: true,
             show: false,
+            frame: false,
             ...windowSize,
             vibrancy: 'hud',  // 'light', 'medium-light' etc
             useContentSize: true,
@@ -50,10 +52,11 @@ export class TomatoPlugin {
                 nativeWindowOpen: false
             }
         });
-        tomatoWin.setWindowButtonVisibility&&tomatoWin.setWindowButtonVisibility(false);
+        tomatoWin.setSkipTaskbar(true);
+        tomatoWin.setWindowButtonVisibility && tomatoWin.setWindowButtonVisibility(false);
         //禁止关闭窗口 关闭时自动隐藏 始终保持只有一个番茄窗口
         tomatoWin.on('close', event => {
-            if (!tomatoWin)return;
+            if (!this.tomatoWin) return;
             event.preventDefault(); //阻止command+q关闭窗口
             tomatoWin.hide();
         })
@@ -70,6 +73,7 @@ export class TomatoPlugin {
             tomatoWin.loadFile(resolve(__dirname, '../../render-build/index.html')).then(() => 1);
         }
     }
+
     initTray(tray: Tray) {
         let eventBoundPosition;
         const resetTomato = (...args) => {
@@ -96,6 +100,7 @@ export class TomatoPlugin {
             tray.popUpContextMenu(contextMenu);
         });
     }
+
     startLockTimer() {
         const tomatoWin = this.tomatoWin;
         clearTimeout(this.resetTimer);
@@ -105,7 +110,12 @@ export class TomatoPlugin {
         this.resetTimer = setTimeout(() => {
             clearInterval(this.intervalTimer);
             //lock computer
-            process.platform === "darwin" ? robot.keyTap('q', ['command', "control"]) : robot.keyTap('l', ["control"]);
+            if (process.platform === "darwin") {
+                robot.keyTap('q', ['command', "control"])
+            } else {
+                //睡眠 rundll32.exe powrprof.dll,SetSuspendState 0,1,0
+                execSync("rundll32.exe user32.dll, LockWorkStation");
+            }
             setTimeout(() => robot.keyTap('escape'), 500);
         }, 1000 * TOMATO__SEC);
         this.intervalTimer = setInterval(() => this.leftSec = TOMATO__SEC - curSec++, 1000);

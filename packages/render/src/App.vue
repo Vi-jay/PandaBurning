@@ -11,6 +11,9 @@ onMounted(() => {
   window["ipcRenderer"].on("router", (event, routerName) => {
     router.replace(routerName);
   });
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") window.close();
+  });
 });
 onUnmounted(() => {
   window["ipcRenderer"].removeAllListeners("router");

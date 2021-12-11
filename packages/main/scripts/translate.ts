@@ -1,4 +1,4 @@
-import {app, BrowserWindow, clipboard, globalShortcut, powerMonitor, screen} from "electron";
+import {app, BrowserWindow, clipboard, dialog, globalShortcut, ipcRenderer, powerMonitor, screen} from "electron";
 import * as robot from "robotjs";
 import puppeteer from "puppeteer-extra";
 import {Browser, Page} from "puppeteer";
@@ -30,7 +30,8 @@ export class TranslatePlugin {
         let translateWin = this.translateWin;
         if (translateWin) {
             const {x, y} = screen.getCursorScreenPoint();
-            translateWin.setPosition(x, y)
+            const offsetX = translateWin.getSize()[0] / 2;
+            translateWin.setPosition(x - offsetX, y)
             translateWin.restore()
             return translateWin.show();
         }
@@ -56,11 +57,11 @@ export class TranslatePlugin {
                 nativeWindowOpen: false
             }
         });
+        translateWin.setSkipTaskbar(true);
         translateWin.setWindowButtonVisibility && translateWin.setWindowButtonVisibility(false);
         //禁止关闭窗口 关闭时自动隐藏 始终保持只有一个番茄窗口
         translateWin.on('close', event => {
-            if (!translateWin) return;
-            event.preventDefault(); //阻止command+q关闭窗口
+            translateWin.isVisible() && event.preventDefault();
             translateWin.hide();
         })
         if (process.env.NODE_ENV === 'development') {
@@ -101,25 +102,26 @@ export class TranslatePlugin {
     async initPages() {
         translatePage = await browser.newPage();
         reverseTranslatePage = await browser.newPage();
+        botPage = await browser.newPage();
         const zh2EnUrl = `https://translate.google.cn/?sl=zh-CN&tl=en&op=translate`;
         const en2ZhUrl = `https://translate.google.cn/?sl=en&tl=zh-CN&op=translate`;
         translatePage.goto(zh2EnUrl).catch(() => 1);
         reverseTranslatePage.goto(en2ZhUrl).catch(() => 1);
-        // await botPage.setRequestInterception(true);
-        // botPage.on('request', (interceptedRequest) => {
-        //     if (["image","media","script"].some((str) => interceptedRequest.resourceType() === str)) return interceptedRequest.abort();
-        //     return interceptedRequest.continue();
-        // })
-        // const pGetUri = () => botUrl;
-        // botPage.goto("https://quillbot.com/");
-        // botPage.exposeFunction('pGetUri', pGetUri);
+        await botPage.setRequestInterception(true);
+        botPage.on('request', (interceptedRequest) => {
+            if (["image"].some((str) => interceptedRequest.resourceType() === str)) return interceptedRequest.abort();
+            return interceptedRequest.continue();
+        })
+        const pGetUri = () => botUrl;
+        botPage.goto("https://quillbot.com/");
+        botPage.exposeFunction('pGetUri', pGetUri);
     }
 
     setupShortcut() {
         const pasteHandle = () => robot.keyTap('v', process.platform === "darwin" ? 'command' : "control");
         const copyHandle = () => robot.keyTap('c', process.platform === "darwin" ? 'command' : "control");
         //翻译快捷键
-        globalShortcut.register('CommandOrControl+B', async () => {
+        globalShortcut.register('CommandOrControl+E', async () => {
             copyHandle();
             await translatePage.waitForTimeout(80);
             const rawText = clipboard.readText();
@@ -139,7 +141,7 @@ export class TranslatePlugin {
             clipboard.writeText(text);
             pasteHandle();
         });
-        globalShortcut.register('CommandOrControl+N', async () => {
+        globalShortcut.register('CommandOrControl+W', async () => {
             copyHandle();
             await reverseTranslatePage.waitForTimeout(80);
             const rawText = clipboard.readText();
@@ -162,52 +164,52 @@ export class TranslatePlugin {
             this.translateWin.webContents.send("translate", "show", text);
         });
         //词法润色快捷键
-        // globalShortcut.register('CommandOrControl+N', async () => {
-        //     copyHandle();
-        //     await translatePage.waitForTimeout(80);
-        //     const rawText = clipboard.readText();
-        //     if (!rawText) return;
-        //     const params = {
-        //         text: rawText,
-        //         strength: 1,
-        //         autoflip: false,
-        //         wikify: false,
-        //         fthresh: -1,
-        //         inputLang: "en",
-        //         quoteIndex: -1,
-        //     };
-        //     botUrl = `https://rest.quillbot.com/api/paraphraser/single-paraphrase/0?${qs.stringify(params)}`;
-        //     const botRes: any = await Promise.race(
-        //         [botPage.evaluate(() => {
-        //             return new Promise((resolve, reject) => {
-        //                 window["pGetUri"]().then((uri) => {
-        //                     fetch(uri, {
-        //                         "headers": {
-        //                             "accept": "application/json, text/plain, */*",
-        //                             "accept-language": "en-US,en;q=0.9",
-        //                             "sec-ch-ua": "\" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"97\", \"Chromium\";v=\"97\"",
-        //                             "sec-ch-ua-mobile": "?0",
-        //                             "sec-ch-ua-platform": "\"Mac OS X\"",
-        //                             "sec-fetch-dest": "empty",
-        //                             "sec-fetch-mode": "cors",
-        //                             "sec-fetch-site": "same-site",
-        //                             "useridtoken": "undefined"
-        //                         },
-        //                         "referrer": "https://quillbot.com/",
-        //                         "referrerPolicy": "strict-origin-when-cross-origin",
-        //                         "body": null,
-        //                         "method": "GET",
-        //                         "mode": "cors",
-        //                         "credentials": "include"
-        //                     }).then((res) => {
-        //                         res.json().then(resolve)
-        //                     }).catch(reject)
-        //                 })
-        //             })
-        //         }), botPage.waitForTimeout(15000)]
-        //     );
-        //     if (botRes?.data[0]) clipboard.writeText(botRes.data[0].paras_1[0].alt);
-        //     pasteHandle();
-        // });
+        globalShortcut.register('CommandOrControl+T', async () => {
+            copyHandle();
+            await translatePage.waitForTimeout(80);
+            const rawText = clipboard.readText();
+            if (!rawText) return;
+            const params = {
+                text: rawText,
+                strength: 1,
+                autoflip: false,
+                wikify: false,
+                fthresh: -1,
+                inputLang: "en",
+                quoteIndex: -1,
+            };
+            botUrl = `https://rest.quillbot.com/api/paraphraser/single-paraphrase/0?${qs.stringify(params)}`;
+            const botRes: any = await Promise.race(
+                [botPage.evaluate(() => {
+                    return new Promise((resolve, reject) => {
+                        window["pGetUri"]().then((uri) => {
+                            fetch(uri, {
+                                "headers": {
+                                    "accept": "application/json, text/plain, */*",
+                                    "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7",
+                                    "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"96\", \"Google Chrome\";v=\"96\"",
+                                    "sec-ch-ua-mobile": "?0",
+                                    "sec-ch-ua-platform": "\"Windows\"",
+                                    "sec-fetch-dest": "empty",
+                                    "sec-fetch-mode": "cors",
+                                    "sec-fetch-site": "same-site",
+                                    "useridtoken": "undefined"
+                                },
+                                "referrer": "https://quillbot.com/",
+                                "referrerPolicy": "strict-origin-when-cross-origin",
+                                "body": null,
+                                "method": "GET",
+                                "mode": "cors",
+                                "credentials": "include"
+                            }).then((res) => {
+                                res.json().then(resolve)
+                            }).catch(reject)
+                        })
+                    })
+                }), botPage.waitForTimeout(15000)]
+            );
+            if (botRes?.data[0]) clipboard.writeText(botRes.data[0].paras_1[0].alt);
+            pasteHandle();
+        });
     }
 }

@@ -8,6 +8,7 @@
     "postinstall": "patch-package",
     "dev": "cross-env NODE_ENV=development node .bin/evv.js dev",
     "build": "cross-env NODE_ENV=production tsc &&   vite build  && electron-builder --dir",
+    "buildprod": "cross-env NODE_ENV=production tsc &&   vite build  && electron-builder",
     "serve": "vite preview"
   },
   "bin": {
