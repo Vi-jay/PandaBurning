@@ -1,0 +1,135 @@
+
+$themeColor: var(--mainColor);
+$global-width: 1260px;
+/*文本格式化，超出范围，显示省略号*/
+/*默认一行内超出换行，可以传行数*/
+@mixin t-overflow($line:1) {
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  //解决安卓会把文字隐藏掉的BUG
+  @if $line == 1 {
+    padding: 1px 0;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
+    word-break: break-all;
+  }
+}
+
+/*弹性盒子居中（传入null不设置该属性）*/
+@mixin flex-center($direction:row,$justify:center,$align:center,$flex-wrap: null) {
+  display: -webkit-flex;
+  display: flex;
+  @if ($direction!=null) {
+    flex-direction: $direction;
+  }
+  @if ($justify!=null) {
+    justify-content: $justify;
+  }
+  @if ($align!=null) {
+    align-items: $align;
+  }
+  @if ($flex-wrap != null) {
+    flex-wrap: $flex-wrap;
+  }
+}
+
+/***
+水平左右
+ */
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/***
+垂直居中
+ */
+@mixin alignCenter {
+  @include flex-center($justify: null);
+}
+
+/*绝对定位  参数顺序：上右下左*/
+@mixin positionAbsolute($top:null,$right:null,$bottom:null,$left:null) {
+  position: absolute;
+  @if ($left!="" & & $left!=null) {
+    left: $left;
+  }
+  @if ($right!="" & & $right!=null) {
+    right: $right;
+  }
+  @if ($top!="" & & $top!=null) {
+    top: $top;
+  }
+  @if ($bottom!="" & & $bottom!=null) {
+    bottom: $bottom;
+  }
+}
+
+/*铺满*/
+@mixin absoluteFull($position:absolute) {
+  @include positionAbsolute(0, 0, 0, 0);
+  position: $position;
+}
+
+/*居中*/
+@mixin absoluteCenter($position:absolute) {
+  @include positionAbsolute(50%, auto, auto, 50%);
+  transform: translate(-50%, -50%);
+  position: $position;
+}
+
+/*居中*/
+@mixin absoluteXCenter($position:absolute) {
+  left: 50%;
+  transform: translateX(-50%);
+  position: $position;
+}
+
+@mixin absoluteYCenter($position:absolute) {
+  top: 50%;
+  transform: translateY(-50%);
+  position: $position;
+}
+
+/* 圆形盒子 */
+@mixin circle($size: 11px,$bg: #fff) {
+  border-radius: 50%;
+  width: $size;
+  height: $size;
+  line-height: $size;
+  text-align: center;
+  background: $bg;
+}
+
+@mixin rect($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin round($size) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+}
+
+@mixin text-stroke($color) {
+  text-shadow: -.06em -.06em 0 $color,
+  -.06em -.13em .06em $color,
+  -.06em -.13em .16em $color,
+  -.06em -.13em .16em $color,
+  .06em .06em 0 $color,
+  .12em .16em .16em $color,
+  -.06em .16em .16em $color,
+  .1em -.1em .12em $color,
+}
+
+@mixin in-mobile() {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}

@@ -8,6 +8,7 @@
     "allowJs": true,
     "jsx": "preserve",
     "sourceMap": false,
+    "skipLibCheck": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": [
@@ -35,5 +36,11 @@
     "packages/render/src/**/*.d.ts",
     "packages/render/src/**/*.tsx",
     "packages/render/src/**/*.vue"
+  ],
+  "exclude": [
+    "node_modules",
+    "upload-temps",
+    ".nuxt",
+    "dist"
   ]
 }

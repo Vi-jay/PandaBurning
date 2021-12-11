@@ -1,3 +1,1 @@
-interface Global{
-    __static:string;
-}
+declare const $electron:any;
