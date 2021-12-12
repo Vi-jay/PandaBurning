@@ -4,4 +4,6 @@ electron.contextBridge.exposeInMainWorld("ipcRenderer", {
     on: electron.ipcRenderer.on.bind(electron.ipcRenderer),
     removeListener: electron.ipcRenderer.removeListener.bind(electron.ipcRenderer),
     removeAllListeners: electron.ipcRenderer.removeAllListeners.bind(electron.ipcRenderer),
+    isMac: process.platform === "darwin",
+    asd:1
 });

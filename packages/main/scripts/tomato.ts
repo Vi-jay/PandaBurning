@@ -67,7 +67,9 @@ export class TomatoPlugin {
                 this.closeTomatoWindow();
             });
             // @ts-ignore
-            tomatoWin.loadURL(process.env.VITE_DEV_SERVER_URL).then(() => tomatoWin.webContents.openDevTools());
+            tomatoWin.loadURL(process.env.VITE_DEV_SERVER_URL).then(() => {
+                tomatoWin.webContents.openDevTools()
+            });
         } else {
             if (process.platform === "darwin") app.dock.hide();
             tomatoWin.loadFile(resolve(__dirname, '../../render-build/index.html')).then(() => 1);

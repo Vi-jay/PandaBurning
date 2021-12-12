@@ -1,11 +1,15 @@
 <template>
-  <router-view/>
+  <div id="AppContainer">
+    <router-view/>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import {onMounted, onUnmounted} from "vue";
+import {onMounted, onUnmounted, ref} from "vue";
 import {useRouter} from "vue-router";
 
+const background = ref(window["ipcRenderer"].isMac ? "transparent" : "black");
+console.log(background.value)
 onMounted(() => {
   const router = useRouter();
   window["ipcRenderer"].on("router", (event, routerName) => {
@@ -20,9 +24,12 @@ onUnmounted(() => {
 })
 </script>
 
-<style>
+<style lang="scss">
 #app {
   height: 100%;
-  background: black;
+}
+#AppContainer {
+  height: 100%;
+  background: v-bind(background);
 }
 </style>

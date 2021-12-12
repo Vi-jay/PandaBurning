@@ -5,7 +5,7 @@
     "moduleResolution": "node",
     "noImplicitAny": false,
     "strict": false,
-    "allowJs": false,
+    "allowJs": true,
     "jsx": "preserve",
     "sourceMap": false,
     "skipLibCheck": true,
@@ -26,19 +26,18 @@
     ],
     "paths": {
       "@/*": [
-        "packages/render/src/*"
+        "packages/*"
       ]
     }
   },
   "include": [
-    "packages/**/render/*.ts",
-    "packages/**/render/*.vue",
-    "typing/*.ts"
+    "../packages/**/*.ts",
+    "../packages/**/*.ts",
+    "../typing/*.ts",
   ],
   "exclude": [
-    "node_modules",
-    "upload-temps",
-    ".nuxt",
-    "dist"
+    "../packages/render-build/**/*.ts",
+    "../packages/render/**/*.ts",
+    "../node_modules",
   ]
 }

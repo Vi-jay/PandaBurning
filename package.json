@@ -6,8 +6,8 @@
   "main": "packages/main/index.js",
   "scripts": {
     "postinstall": "patch-package",
-    "dev": "cross-env NODE_ENV=development node .bin/evv.js dev",
-    "build": "cross-env NODE_ENV=production tsc &&   vite build  && electron-builder --dir",
+    "dev": "cross-env NODE_ENV=development  tsc-watch --noClear -p .electron --onSuccess \"node .electron/restart.js\"",
+    "build": "cross-env NODE_ENV=production tsc  -p .electron  &&   vite build  && electron-builder --dir",
     "buildprod": "cross-env NODE_ENV=production tsc &&   vite build  && electron-builder",
     "serve": "vite preview"
   },
@@ -15,11 +15,11 @@
     "evv": "script/evv.js"
   },
   "dependencies": {
+    "@types/puppeteer": "^5.4.4",
+    "axios": "^0.24.0",
     "puppeteer": "^13.0.0",
     "puppeteer-extra": "^3.2.3",
     "puppeteer-extra-plugin-stealth": "^2.9.0",
-    "@types/puppeteer": "^5.4.4",
-    "axios": "^0.24.0",
     "qs": "^6.10.2",
     "robotjs": "^0.6.0",
     "vant": "3",
@@ -36,6 +36,7 @@
     "electron-rebuild": "^3.2.5",
     "patch-package": "^6.4.7",
     "sass": "latest",
+    "tsc-watch": "^4.5.0",
     "typescript": "4.2.3",
     "vite": "2.5.10"
   },
