@@ -22,7 +22,7 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/common.scss";
+@import "../assets/common";
 #Translate {
   color: white;
   height: 100%;

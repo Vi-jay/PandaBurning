@@ -9,21 +9,13 @@
 
 import {onMounted, onUnmounted, ref} from "vue";
 import {useRouter} from "vue-router";
-import {useUpdate} from "@/hooks/update";
+import {useUpdate} from "@/hooks/app-update";
+import {useWindowsRouter} from "@/hooks/windows-router";
 
 const {ipcRenderer} = require("electron");
 const background = ref(process.platform === "darwin" ? "transparent" : "black");
 const {checkSoftwareUpdate, tips, downloadPercent} = useUpdate();
-onMounted(() => {
-  const router = useRouter();
-  ipcRenderer.on("router", (event, routerName) => {
-    router.replace(routerName);
-    console.log(routerName)
-  });
-});
-onUnmounted(() => {
-  ipcRenderer.removeAllListeners("router");
-})
+useWindowsRouter();
 </script>
 
 <style lang="scss">

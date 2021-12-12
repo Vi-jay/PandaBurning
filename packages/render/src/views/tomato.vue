@@ -27,7 +27,7 @@ const countDown: Ref<CountDownInstance> = ref(null);
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/common.scss";
+@import "../assets/common";
 #Tomato {
   color: white;
   height: 100%;

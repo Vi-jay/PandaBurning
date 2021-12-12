@@ -1,5 +1,5 @@
 import {autoUpdater} from "electron-updater";
-import {UPLOAD_URL} from "../config";
+import {UPLOAD_URL} from "../config/properties";
 import {BrowserWindow, ipcMain} from "electron"
 
 export function initUpdateHandler(plugins) {

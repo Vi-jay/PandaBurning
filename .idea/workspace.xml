@@ -2,16 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="20bdcbec-570b-4028-99f8-6e294414eb2a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.electron/restart.js" beforeDir="false" afterPath="$PROJECT_DIR$/.electron/restart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/panda_burning.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/panda_burning.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/main-process/native-ui/dialogs/error.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/main-process/native-ui/dialogs/information.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/main-process/native-ui/dialogs/open-file.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/main-process/native-ui/dialogs/save.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/main-process/native-ui/drag/codeIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/main-process/native-ui/drag/drag.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/main-process/native-ui/tray/iconTemplate.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/main-process/native-ui/tray/iconTemplate@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/main-process/native-ui/tray/tray.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/main-process/native-ui/tray/windows-icon@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/render/src/components/foot-bar.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/render/src/hooks/windows-router.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/render/src/views/test.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/main/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/main/scripts/tomato.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main/scripts/tomato.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/main/scripts/translate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main/scripts/translate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/extraResources/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/extra-resources/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/main/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main-process/config/properties.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/main/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main-process/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/main/pathUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main-process/utils/pathUtils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/main/scripts/tomato.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main-process/feat/tomato.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/main/scripts/translate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main-process/feat/translate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/main/scripts/update.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main-process/system/update.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/preload/index.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/render/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/packages/render/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/render/src/components/translate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/packages/render/src/components/translate.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/render/src/hooks/update.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/render/src/hooks/update.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/render/src/components/tomato.vue" beforeDir="false" afterPath="$PROJECT_DIR$/packages/render/src/views/tomato.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/render/src/components/translate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/packages/render/src/views/translate.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/render/src/hooks/update.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/render/src/hooks/app-update.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/render/src/hooks/win-router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main-process/windows/test-window.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/render/src/routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/render/src/routes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pid" beforeDir="false" afterPath="$PROJECT_DIR$/pid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +45,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
+        <option value="vue3" />
       </list>
     </option>
   </component>
@@ -51,15 +75,22 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/example" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/packages/main-process/native-ui" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="fileTemplates" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="two.files.diff.last.used.folder" value="$PROJECT_DIR$/example" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/packages/main-process/native-ui" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/packages/render/src/views" />
+      <recent name="$PROJECT_DIR$/packages/main-process/system" />
+      <recent name="$PROJECT_DIR$/packages/main-process/config" />
+      <recent name="$PROJECT_DIR$/packages/main-process/utils" />
       <recent name="$PROJECT_DIR$/typing" />
     </key>
   </component>
@@ -73,7 +104,7 @@
       <updated>1639299017563</updated>
       <workItem from="1639299021811" duration="435000" />
       <workItem from="1639299462712" duration="557000" />
-      <workItem from="1639300036185" duration="1385000" />
+      <workItem from="1639300036185" duration="4537000" />
     </task>
     <servers />
   </component>
@@ -86,14 +117,7 @@
         <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/main/scripts/tomato.js" />
         <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/main/pathUtils.js" />
         <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/main/index.js" />
-        <option value="$PROJECT_DIR$/packages/main/scripts/tomato.js" />
         <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/main/config.js" />
-        <option value="$PROJECT_DIR$/packages/preload/index.js" />
-        <option value="$PROJECT_DIR$/packages/main/scripts/update.js" />
-        <option value="$PROJECT_DIR$/packages/main/index.js" />
-        <option value="$PROJECT_DIR$/packages/main/config.js" />
-        <option value="$PROJECT_DIR$/packages/main/pathUtils.js" />
-        <option value="$PROJECT_DIR$/packages/main/scripts/translate.js" />
       </list>
     </option>
   </component>

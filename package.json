@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "description": "",
   "author": "",
-  "main": "packages/main/index.js",
+  "main": "packages/main-process/index.js",
   "scripts": {
     "postinstall": "patch-package",
     "dev": "cross-env NODE_ENV=development  tsc-watch --noClear -p .electron --onSuccess \"node .electron/restart.js\"",
@@ -53,7 +53,7 @@
     ],
     "asar": false,
     "extraResources": {
-      "from": "./packages/extraResources/",
+      "from": "./packages/extra-resources/",
       "to": "extraResources"
     },
     "directories": {

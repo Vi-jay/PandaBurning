@@ -1,9 +1,10 @@
 import {app, BrowserWindow, globalShortcut, clipboard, dialog, Tray, Menu, ipcMain, remote} from "electron";
-import {TomatoPlugin} from "./scripts/tomato";
-import PathUtils from "./pathUtils";
-import {IS_DEV, UPLOAD_URL} from "./config";
-import {initUpdateHandler} from "./scripts/update";
-import {TranslatePlugin} from "./scripts/translate";
+import {TomatoPlugin} from "./feat/tomato";
+import PathUtils from "./utils/pathUtils";
+import {initUpdateHandler} from "./system/update";
+import {TranslatePlugin} from "./feat/translate";
+import {IS_DEV} from "./config/properties";
+import {createTestWindow} from "./windows/test-window";
 
 
 //全局引用防止对象被回收
@@ -11,9 +12,10 @@ const plugins: Record<string, any> = {};
 let tray = null as Tray;
 
 function initPlugins() {
-    tray = new Tray(PathUtils.resolvePath("icon.png"));
-    plugins.tomatoPlugin = new TomatoPlugin(tray);
-    plugins.translatePlugin = new TranslatePlugin();
+    // tray = new Tray(PathUtils.resolvePath("icon.png"));
+    // plugins.tomatoPlugin = new TomatoPlugin(tray);
+    createTestWindow();
+    // plugins.translatePlugin = new TranslatePlugin();
 }
 
 app.whenReady().then(() => {
