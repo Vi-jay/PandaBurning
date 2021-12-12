@@ -1,7 +1,7 @@
 <template>
   <div id="AppContainer">
     <router-view/>
-    <button @click="checkSoftwareUpdate">检查更新</button>
+<!--    <button @click="checkSoftwareUpdate">检查更新</button>-->
   </div>
 </template>
 
@@ -16,7 +16,10 @@ const background = ref(process.platform === "darwin" ? "transparent" : "black");
 const {checkSoftwareUpdate, tips, downloadPercent} = useUpdate();
 onMounted(() => {
   const router = useRouter();
-  ipcRenderer.on("router", (event, routerName) => router.replace(routerName));
+  ipcRenderer.on("router", (event, routerName) => {
+    router.replace(routerName);
+    console.log(routerName)
+  });
 });
 onUnmounted(() => {
   ipcRenderer.removeAllListeners("router");

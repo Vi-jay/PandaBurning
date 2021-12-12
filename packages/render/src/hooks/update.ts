@@ -1,12 +1,11 @@
 import {onMounted, ref} from "vue";
-import {ipcRenderer} from "electron";
+
+const {ipcRenderer} = require("electron");
 import {useRouter} from "vue-router";
 
 export function useUpdate() {
-
     const tips = ref("");
     const downloadPercent = ref("");
-
     onMounted(() => {
         window.addEventListener("keydown", (event) => {
             if (event.key === "Escape") window.close();

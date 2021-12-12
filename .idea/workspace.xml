@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="20bdcbec-570b-4028-99f8-6e294414eb2a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/packages/main/scripts/update.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/render/src/hooks/update.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/render/src/hooks/win-router.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.electron/restart.js" beforeDir="false" afterPath="$PROJECT_DIR$/.electron/restart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/panda_burning.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/panda_burning.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/main/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/main/scripts/tomato.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main/scripts/tomato.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/main/scripts/translate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main/scripts/translate.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/render/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/packages/render/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/render/src/components/translate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/packages/render/src/components/translate.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/render/src/hooks/update.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/render/src/hooks/update.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pid" beforeDir="false" afterPath="$PROJECT_DIR$/pid" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,6 +53,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/example" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="two.files.diff.last.used.folder" value="$PROJECT_DIR$/example" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -70,7 +73,7 @@
       <updated>1639299017563</updated>
       <workItem from="1639299021811" duration="435000" />
       <workItem from="1639299462712" duration="557000" />
-      <workItem from="1639300036185" duration="273000" />
+      <workItem from="1639300036185" duration="1385000" />
     </task>
     <servers />
   </component>
@@ -78,24 +81,19 @@
     <option name="version" value="3" />
     <option name="exactExcludedFiles">
       <list>
-        <option value="$PROJECT_DIR$/packages/main/pathUtils.js" />
-        <option value="$PROJECT_DIR$/packages/main/scripts/tomato.js" />
-        <option value="$PROJECT_DIR$/packages/main/config.js" />
-        <option value="$PROJECT_DIR$/packages/main/scripts/translate.js" />
-        <option value="$PROJECT_DIR$/packages/preload/index.js" />
-        <option value="$PROJECT_DIR$/packages/main/index.js" />
+        <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/preload/index.js" />
         <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/main/scripts/translate.js" />
         <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/main/scripts/tomato.js" />
-        <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/preload/index.js" />
         <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/main/pathUtils.js" />
-        <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/main/config.js" />
         <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/main/index.js" />
-        <option value="$PROJECT_DIR$/vite.config.js" />
-        <option value="$PROJECT_DIR$/packages/render/src/routes.js" />
-        <option value="$PROJECT_DIR$/packages/render/src/main.js" />
-        <option value="$PROJECT_DIR$/build/win-unpacked/resources/app/vite.config.js" />
-        <option value="$PROJECT_DIR$/packages/render/src/routes.js" />
-        <option value="$PROJECT_DIR$/packages/render/src/main.js" />
+        <option value="$PROJECT_DIR$/packages/main/scripts/tomato.js" />
+        <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/main/config.js" />
+        <option value="$PROJECT_DIR$/packages/preload/index.js" />
+        <option value="$PROJECT_DIR$/packages/main/scripts/update.js" />
+        <option value="$PROJECT_DIR$/packages/main/index.js" />
+        <option value="$PROJECT_DIR$/packages/main/config.js" />
+        <option value="$PROJECT_DIR$/packages/main/pathUtils.js" />
+        <option value="$PROJECT_DIR$/packages/main/scripts/translate.js" />
       </list>
     </option>
   </component>
@@ -113,5 +111,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -3,6 +3,7 @@ import {TomatoPlugin} from "./scripts/tomato";
 import PathUtils from "./pathUtils";
 import {IS_DEV, UPLOAD_URL} from "./config";
 import {initUpdateHandler} from "./scripts/update";
+import {TranslatePlugin} from "./scripts/translate";
 
 
 //全局引用防止对象被回收
@@ -12,7 +13,7 @@ let tray = null as Tray;
 function initPlugins() {
     tray = new Tray(PathUtils.resolvePath("icon.png"));
     plugins.tomatoPlugin = new TomatoPlugin(tray);
-    // plugins.translatePlugin = new TranslatePlugin();
+    plugins.translatePlugin = new TranslatePlugin();
 }
 
 app.whenReady().then(() => {

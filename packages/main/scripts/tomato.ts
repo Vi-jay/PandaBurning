@@ -41,7 +41,6 @@ export class TomatoPlugin {
             useContentSize: true,
             autoHideMenuBar: process.env.MODE !== 'development',
             webPreferences: {
-                preload: resolve(__dirname, '../../preload/index.ts'),
                 webSecurity: false,
                 nodeIntegration: true,
                 contextIsolation: false,

@@ -9,7 +9,7 @@ import {resolve} from "path";
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin());
 /***
- * todo UI选择语言界面
+ * todo UI select language interface
  * 显示选择内容的翻译 弹窗
  */
 let translatePage!: Page;
@@ -47,10 +47,9 @@ export class TranslatePlugin {
             vibrancy: 'hud',  // 'light', 'medium-light' etc
             autoHideMenuBar: process.env.MODE !== 'development',
             webPreferences: {
-                preload: resolve(__dirname, '../../preload/index.ts'),
-                webSecurity: true,
+                webSecurity: false,
                 nodeIntegration: true,
-                contextIsolation: true,
+                contextIsolation: false,
                 nodeIntegrationInWorker: true,
                 nativeWindowOpen: false
             }
@@ -59,7 +58,7 @@ export class TranslatePlugin {
         translateWin.setWindowButtonVisibility && translateWin.setWindowButtonVisibility(false);
         //禁止关闭窗口 关闭时自动隐藏 始终保持只有一个番茄窗口
         translateWin.on('close', event => {
-            // translateWin.isVisible() && !IS_DEV && event.preventDefault();
+            translateWin.isVisible() && event.preventDefault();
             translateWin.hide();
         })
         if (process.env.NODE_ENV === 'development') {

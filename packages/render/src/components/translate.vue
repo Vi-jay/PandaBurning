@@ -7,19 +7,17 @@
 
 <script setup lang="ts">
 import {ref, onMounted, getCurrentInstance, onUnmounted, onUpdated} from "vue";
-import {Ref} from "@vue/reactivity";
-import {CountDownInstance} from "vant";
+const {ipcRenderer} = require("electron");
 const translateText = ref("");
 onMounted(() => {
-  window["ipcRenderer"].on("translate", (event, eventName, text) => {
+  ipcRenderer.on("translate", (event, eventName, text) => {
     if (eventName === "show") {
       translateText.value= text;
-      console.log(text)
     }
   });
 });
 onUnmounted(() => {
-  window["ipcRenderer"].removeAllListeners("translate");
+  ipcRenderer.removeAllListeners("translate");
 })
 </script>
 
