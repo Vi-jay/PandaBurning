@@ -9,7 +9,6 @@
 import {ref, onMounted, getCurrentInstance, onUnmounted, onUpdated} from "vue";
 import {Ref} from "@vue/reactivity";
 import {CountDownInstance} from "vant";
-
 const tomatoSec = ref(0);
 const countDown: Ref<CountDownInstance> = ref(null);
 onMounted(() => {
