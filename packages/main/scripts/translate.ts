@@ -20,12 +20,10 @@ let browser!: Browser;
 
 export class TranslatePlugin {
     translateWin!: BrowserWindow;
-
     constructor() {
         this.initPuppeteer();
         this.setupTranslateWindow();
     }
-
     setupTranslateWindow(): void {
         let translateWin = this.translateWin;
         if (translateWin) {
@@ -61,7 +59,7 @@ export class TranslatePlugin {
         translateWin.setWindowButtonVisibility && translateWin.setWindowButtonVisibility(false);
         //禁止关闭窗口 关闭时自动隐藏 始终保持只有一个番茄窗口
         translateWin.on('close', event => {
-            translateWin.isVisible() && event.preventDefault();
+            // translateWin.isVisible() && !IS_DEV && event.preventDefault();
             translateWin.hide();
         })
         if (process.env.NODE_ENV === 'development') {
@@ -79,13 +77,11 @@ export class TranslatePlugin {
             });
         }
     }
-
     closeTranslateWindow() {
         const translateWin = this.translateWin;
         this.translateWin = null;
         translateWin.close()
     }
-
     async initPuppeteer() {
         browser = await puppeteer.launch({headless: true});
         await this.initPages();
@@ -98,7 +94,6 @@ export class TranslatePlugin {
             return this.initPages();
         })
     }
-
     async initPages() {
         translatePage = await browser.newPage();
         reverseTranslatePage = await browser.newPage();
@@ -116,7 +111,6 @@ export class TranslatePlugin {
         botPage.goto("https://quillbot.com/");
         botPage.exposeFunction('pGetUri', pGetUri);
     }
-
     setupShortcut() {
         const pasteHandle = () => robot.keyTap('v', process.platform === "darwin" ? 'command' : "control");
         const copyHandle = () => robot.keyTap('c', process.platform === "darwin" ? 'command' : "control");

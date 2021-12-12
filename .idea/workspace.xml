@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="20bdcbec-570b-4028-99f8-6e294414eb2a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.electron/pid" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/panda_burning.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/render/src/a.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/typing/shims-electron.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.electron/restart.js" beforeDir="false" afterPath="$PROJECT_DIR$/.electron/restart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/evv-project.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/extraResources/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/extraResources/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/main/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/main/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/main/pathUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main/pathUtils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/main/scripts/tomato.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main/scripts/tomato.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/main/scripts/translate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main/scripts/translate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/preload/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/preload/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/render/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/packages/render/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/render/src/components/tomato.vue" beforeDir="false" afterPath="$PROJECT_DIR$/packages/render/src/components/tomato.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/render/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/render/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/render/src/shims-vue.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/render/src/shims-vue.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pid" beforeDir="false" afterPath="$PROJECT_DIR$/pid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/typing/global.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/typing/global.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="22B7EXc1nFPtJnuONuKOkXbosms" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/typing" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="20bdcbec-570b-4028-99f8-6e294414eb2a" name="Changes" comment="" />
+      <created>1639299017563</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1639299017563</updated>
+      <workItem from="1639299021811" duration="435000" />
+      <workItem from="1639299462712" duration="557000" />
+      <workItem from="1639300036185" duration="273000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/packages/main/pathUtils.js" />
+        <option value="$PROJECT_DIR$/packages/main/scripts/tomato.js" />
+        <option value="$PROJECT_DIR$/packages/main/config.js" />
+        <option value="$PROJECT_DIR$/packages/main/scripts/translate.js" />
+        <option value="$PROJECT_DIR$/packages/preload/index.js" />
+        <option value="$PROJECT_DIR$/packages/main/index.js" />
+        <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/main/scripts/translate.js" />
+        <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/main/scripts/tomato.js" />
+        <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/preload/index.js" />
+        <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/main/pathUtils.js" />
+        <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/main/config.js" />
+        <option value="$PROJECT_DIR$/build/mac/熊猫烧香.app/Contents/Resources/app/packages/main/index.js" />
+      </list>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>

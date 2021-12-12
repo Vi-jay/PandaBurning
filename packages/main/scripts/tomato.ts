@@ -10,20 +10,17 @@ export class TomatoPlugin {
     intervalTimer: any = null;
     leftSec: number = TOMATO__SEC;
     tomatoWin: BrowserWindow;
-
     constructor(tray) {
         this.tray = tray;
         this.initTray(tray);
         this.setupTomatoWindow();
         powerMonitor.on("unlock-screen", () => this.startLockTimer())
     }
-
     closeTomatoWindow() {
         const tomatoWin = this.tomatoWin;
         this.tomatoWin = null;
         tomatoWin && tomatoWin.close()
     }
-
     setupTomatoWindow(position: { x: number, y: number } = {x: 0, y: 0}): void {
         let tomatoWin = this.tomatoWin;
         if (tomatoWin) {
@@ -45,9 +42,9 @@ export class TomatoPlugin {
             autoHideMenuBar: process.env.MODE !== 'development',
             webPreferences: {
                 preload: resolve(__dirname, '../../preload/index.ts'),
-                webSecurity: true,
+                webSecurity: false,
                 nodeIntegration: true,
-                contextIsolation: true,
+                contextIsolation: false,
                 nodeIntegrationInWorker: true,
                 nativeWindowOpen: false
             }
@@ -56,8 +53,8 @@ export class TomatoPlugin {
         tomatoWin.setWindowButtonVisibility && tomatoWin.setWindowButtonVisibility(false);
         //禁止关闭窗口 关闭时自动隐藏 始终保持只有一个番茄窗口
         tomatoWin.on('close', event => {
-            if (!this.tomatoWin) return;
-            event.preventDefault(); //阻止command+q关闭窗口
+            // if (!this.tomatoWin) return;
+            // IS_DEV || event.preventDefault(); //阻止command+q关闭窗口
             tomatoWin.hide();
         })
         if (process.env.NODE_ENV === 'development') {
@@ -75,7 +72,6 @@ export class TomatoPlugin {
             tomatoWin.loadFile(resolve(__dirname, '../../render-build/index.html')).then(() => 1);
         }
     }
-
     initTray(tray: Tray) {
         let eventBoundPosition;
         const resetTomato = (...args) => {
@@ -102,7 +98,6 @@ export class TomatoPlugin {
             tray.popUpContextMenu(contextMenu);
         });
     }
-
     startLockTimer() {
         const tomatoWin = this.tomatoWin;
         clearTimeout(this.resetTimer);

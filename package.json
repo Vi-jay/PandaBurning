@@ -1,5 +1,5 @@
 {
-  "name": "evv-project",
+  "name": "panda_burning",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -17,6 +17,7 @@
   "dependencies": {
     "@types/puppeteer": "^5.4.4",
     "axios": "^0.24.0",
+    "electron-updater": "^4.6.1",
     "puppeteer": "^13.0.0",
     "puppeteer-extra": "^3.2.3",
     "puppeteer-extra-plugin-stealth": "^2.9.0",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@babel/types": "^7.16.0",
+    "@types/node": "^16.11.12",
     "@vitejs/plugin-vue": "^1.2.1",
     "@vue/compiler-sfc": "^3.0.5",
     "cross-env": "^7.0.3",
@@ -41,8 +43,14 @@
     "vite": "^2.7.1"
   },
   "build": {
-    "productName": "工具包",
-    "copyright": "By a lonely man",
+    "productName": "熊猫烧香",
+    "copyright": "vijay's tool",
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "https://h5.fulugame.cn/test/download/"
+      }
+    ],
     "asar": false,
     "extraResources": {
       "from": "./packages/extraResources/",

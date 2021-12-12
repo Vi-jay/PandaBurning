@@ -1,8 +1,7 @@
 const {spawn} = require('child_process')
-const electronPath = require('electron')
+const electron = require('electron')
 const fs = require("fs");
 const {createServer} = require("vite");
-
 function closeElectronProcess() {
     let pid = fs.existsSync("./pid") ? fs.readFileSync("./pid") : null;
     if (pid !== null) {
@@ -28,8 +27,7 @@ function closeElectronProcess() {
     const path = '/'
     process.env.VITE_DEV_SERVER_URL = `${protocol}//${host}:${port}${path}`;
 
-
-    const electronProcess = spawn(String(electronPath), ['.'])
+    const electronProcess = spawn(String(electron), ['.'])
     electronProcess.stdout.on('data', d => console.log(d.toString()))
     electronProcess.stderr.on('data', d => console.error(d.toString()));
     fs.writeFileSync("./pid", String(electronProcess.pid));

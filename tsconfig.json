@@ -2,10 +2,10 @@
   "compilerOptions": {
     "target": "ESNEXT",
     "module": "CommonJS",
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "noImplicitAny": false,
     "strict": false,
-    "allowJs": false,
+    "allowJs": true,
     "jsx": "preserve",
     "sourceMap": false,
     "skipLibCheck": true,
@@ -36,9 +36,6 @@
     "typing/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "upload-temps",
-    ".nuxt",
-    "dist"
+    "node_modules"
   ]
 }
