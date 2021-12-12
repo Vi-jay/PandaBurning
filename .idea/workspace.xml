@@ -3,16 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="20bdcbec-570b-4028-99f8-6e294414eb2a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/main/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/main/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/render/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/packages/render/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/render/src/a.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/render/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/render/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/render/src/shims-vue.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/render/src/shims-vue.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pid" beforeDir="false" afterPath="$PROJECT_DIR$/pid" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/typing/global.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/typing/global.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/typing/shims-electron.d.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +13,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="22B7EXc1nFPtJnuONuKOkXbosms" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -88,6 +88,15 @@
     </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">

@@ -29,13 +29,12 @@ function updateHandle() {
         BrowserWindow.getAllWindows()[0].webContents.send('downloadProgress', progressObj)
     })
     autoUpdater.on('update-downloaded', function (event, releaseNotes, releaseName, releaseDate, updateUrl, quitAndUpdate) {
-        ipcMain.on('isUpdateNow', (e, arg) => {
-            console.log(arguments);
-            console.log("开始更新");
-            //some code here to handle event
-            autoUpdater.quitAndInstall();
-        })
-        // mainWindow.webContents.send('isUpdateNow')
+        // ipcMain.on('isUpdateNow', (e, arg) => {
+        BrowserWindow.getAllWindows()[0].webContents.send('message', "开始安装");
+        plugins.tomatoPlugin.closeTomatoWindow();
+        //some code here to handle event`
+        autoUpdater.quitAndInstall();
+        // })
     });
     ipcMain.on("checkForUpdate", () => {
         //执行自动更新检查
