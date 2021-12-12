@@ -17,7 +17,7 @@
     ],
     "types": [
       "vite/client",
-      "node"
+      "@types/node"
     ],
     "baseUrl": ".",
     "typeRoots": [
@@ -31,11 +31,11 @@
     }
   },
   "include": [
-    "packages/**/render/*.ts",
-    "packages/**/render/*.vue",
-    "typing/*.ts"
+    "packages/render/**/src/*.ts",
+    "packages/render/**/src/*.vue"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "packages/render-build/**/*"
   ]
 }
