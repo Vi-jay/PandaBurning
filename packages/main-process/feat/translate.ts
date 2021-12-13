@@ -114,7 +114,7 @@ export class TranslatePlugin {
         const pasteHandle = () => robot.keyTap('v', process.platform === "darwin" ? 'command' : "control");
         const copyHandle = () => robot.keyTap('c', process.platform === "darwin" ? 'command' : "control");
         //翻译快捷键
-        globalShortcut.register('CommandOrControl+E', async () => {
+        globalShortcut.register('CommandOrControl+1', async () => {
             copyHandle();
             await translatePage.waitForTimeout(80);
             const rawText = clipboard.readText();
@@ -134,7 +134,7 @@ export class TranslatePlugin {
             clipboard.writeText(text);
             pasteHandle();
         });
-        globalShortcut.register('CommandOrControl+W', async () => {
+        globalShortcut.register('CommandOrControl+2', async () => {
             copyHandle();
             await reverseTranslatePage.waitForTimeout(80);
             const rawText = clipboard.readText();
@@ -157,7 +157,7 @@ export class TranslatePlugin {
             this.translateWin.webContents.send("translate", "show", text);
         });
         //词法润色快捷键
-        globalShortcut.register('CommandOrControl+T', async () => {
+        globalShortcut.register('CommandOrControl+3', async () => {
             copyHandle();
             await translatePage.waitForTimeout(80);
             const rawText = clipboard.readText();

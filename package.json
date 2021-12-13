@@ -54,7 +54,7 @@
     "asar": false,
     "extraResources": {
       "from": "./packages/extra-resources/",
-      "to": "extraResources"
+      "to": "extra-resources"
     },
     "directories": {
       "output": "build"

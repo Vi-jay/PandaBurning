@@ -72,7 +72,7 @@ class TomatoPlugin {
         //禁止关闭窗口 关闭时自动隐藏 始终保持只有一个番茄窗口
         tomatoWin.on('close', event => {
             // if (!this.tomatoWin) return;
-            // IS_DEV || event.preventDefault(); //阻止command+q关闭窗口
+            tomatoWin.isVisible() && event.preventDefault();
             tomatoWin.hide();
         });
         if (process.env.NODE_ENV === 'development') {
