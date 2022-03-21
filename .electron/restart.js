@@ -7,6 +7,7 @@ function closeElectronProcess() {
     let pid = fs.existsSync("./pid") ? fs.readFileSync("./pid") : null;
     if (pid !== null) {
         try {
+            //pid未被杀死就强制杀死 如果已经杀死就算了
             process.kill(+pid)
         } catch (e) {
             // console.log(e)
