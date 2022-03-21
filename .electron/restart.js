@@ -9,7 +9,7 @@ function closeElectronProcess() {
         try {
             process.kill(+pid)
         } catch (e) {
-            console.log(e)
+            // console.log(e)
         }
     }
 }

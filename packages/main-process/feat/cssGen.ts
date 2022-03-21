@@ -1,4 +1,4 @@
-const {parse, walk} = require("html5parser");
+const {parse} = require("html5parser");
 import {app, BrowserWindow, globalShortcut, clipboard, dialog, Tray, Menu, ipcMain, remote} from "electron";
 import * as robot from "robotjs";
 
@@ -6,26 +6,22 @@ function getUsefulChildNodes(node) {
     if (!Array.isArray(node.body)) return [];
     return node.body.filter(({type}) => type === 'Tag');
 }
-
 function getNodeClass(node) {
     if (!node.attributes) return;
     const target = node.attributes.find(({name}) => name.value === 'class');
     if (!target) return;
     return target.value.value
 }
-
 function getAllChildChildren(node) {
     const children = getUsefulChildNodes(node);
     return children.reduce((acc, cur) => {
         return acc.concat(getUsefulChildNodes(cur).length ? [cur, ...getAllChildChildren(cur)] : cur);
     }, [])
 }
-
 function flat(arr = [], depth = Infinity) {
     if (depth <= 0) return arr;
     return arr.reduce((acc, cur) => acc.concat(Array.isArray(cur) && depth > 1 ? flat(cur, depth - 1) : cur), [])
 }
-
 /***
  * 把每个父节点和其子节点所有class提取出来 放到一起
  * 然后遍历子节点 是否有__
@@ -37,12 +33,15 @@ function flat(arr = [], depth = Infinity) {
  * 递归拼接
  */
 function cssGenPlugins(html) {
-    const [node] = parse(html);
+    let node = parse(html);
+    ([node] = getUsefulChildNodes({body: node}));
     const hasClass = getNodeClass(node);
     const usefulTags = getUsefulChildNodes(hasClass ? {body: [node]} : node);
     return usefulTags.reduce((acc, node) => {
         const parentClass = getNodeClass(node);
         let childrenClasses = flat(getAllChildChildren(node)).map(getNodeClass).filter(Boolean);
+        if (!parentClass) return acc;
+        if (!childrenClasses.length) return acc + `.${parentClass}{\n`;
         childrenClasses = childrenClasses.map((clazz) => clazz.includes("__") ? clazz : [clazz]);
         const childrenParent = [[parentClass], ...childrenClasses.filter(Array.isArray)];
         childrenClasses = childrenParent.map(([parentName]) => {
@@ -51,7 +50,7 @@ function cssGenPlugins(html) {
                 return item.includes(parentName)
             });
             return [parentName, ...targets];
-        });
+        }).filter(Boolean);
         let [firstClasses, ...restClasses] = childrenClasses;
         firstClasses = flat(firstClasses.concat(restClasses.filter((x) => x.length === 1)));
         restClasses = restClasses.filter((x) => x.length > 1);
@@ -67,9 +66,10 @@ function cssGenPlugins(html) {
         return acc + fullStr;
     }, '')
 }
+
 export class CssGen {
     constructor() {
-        globalShortcut.register('CommandOrControl+1', () => {
+        globalShortcut.register('CommandOrControl+5', () => {
             robot.keyTap('c', 'command');
             setTimeout(() => {
                 const cssStr = cssGenPlugins(clipboard.readText());

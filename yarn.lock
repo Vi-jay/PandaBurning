@@ -1897,8 +1897,8 @@ hosted-git-info@^4.0.2:
 
 html5parser@^2.0.2:
   version "2.0.2"
-  resolved "https://registry.npmmirror.com/html5parser/download/html5parser-2.0.2.tgz#dd504884761e024e682e1535ee9b5b997cc47293"
-  integrity sha1-3VBIhHYeAk5oLhU17ptbmXzEcpM=
+  resolved "https://registry.npmmirror.com/html5parser/-/html5parser-2.0.2.tgz#dd504884761e024e682e1535ee9b5b997cc47293"
+  integrity sha512-L0y+IdTVxHsovmye8MBtFgBvWZnq1C9WnI/SmJszxoQjmUH1psX2uzDk21O5k5et6udxdGjwxkbmT9eVRoG05w==
   dependencies:
     tslib "^2.2.0"
 
@@ -3636,8 +3636,8 @@ tsc-watch@^4.5.0:
 
 tslib@^2.2.0:
   version "2.3.1"
-  resolved "https://registry.nlark.com/tslib/download/tslib-2.3.1.tgz?cache=0&sync_timestamp=1628722556410&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ftslib%2Fdownload%2Ftslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
-  integrity sha1-6KM1rdXOrlGqJh0ypJAVjvBC7wE=
+  resolved "https://registry.npmmirror.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
+  integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
 
 tunnel-agent@^0.6.0:
   version "0.6.0"

@@ -20,62 +20,83 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CssGen = void 0;
-const { parse, walk } = require("html5parser");
+const { parse } = require("html5parser");
 const electron_1 = require("electron");
 const robot = __importStar(require("robotjs"));
+function getUsefulChildNodes(node) {
+    if (!Array.isArray(node.body))
+        return [];
+    return node.body.filter(({ type }) => type === 'Tag');
+}
+function getNodeClass(node) {
+    if (!node.attributes)
+        return;
+    const target = node.attributes.find(({ name }) => name.value === 'class');
+    if (!target)
+        return;
+    return target.value.value;
+}
+function getAllChildChildren(node) {
+    const children = getUsefulChildNodes(node);
+    return children.reduce((acc, cur) => {
+        return acc.concat(getUsefulChildNodes(cur).length ? [cur, ...getAllChildChildren(cur)] : cur);
+    }, []);
+}
+function flat(arr = [], depth = Infinity) {
+    if (depth <= 0)
+        return arr;
+    return arr.reduce((acc, cur) => acc.concat(Array.isArray(cur) && depth > 1 ? flat(cur, depth - 1) : cur), []);
+}
+/***
+ * 把每个父节点和其子节点所有class提取出来 放到一起
+ * 然后遍历子节点 是否有__
+ * 如果有
+ *      并且 前半段与父节点一致 则 拼接&__放入父节点下
+ *      否则 找到与前半段一致的类名 拼接&__放入该类名下
+ * 如果没有 则[该class]（用于方便其子类追加）直接放入父节点下
+ * 最后将length为1的class抹平
+ * 递归拼接
+ */
 function cssGenPlugins(html) {
-    const ast = parse(html);
-    const parents = [];
-    function formatChildClass(clazz) {
-        return clazz.replace(/.*__(.*)/g, "&__$1");
-    }
-    function findArr(arr, child) {
-        let target;
-        while (!target && arr.length) {
-            target = arr.find(({ node, children }) => node.body && node.body.includes(child));
-            arr = arr.reduce((acc, { children }) => acc.concat(children), []);
-        }
-        return { arr: target ? target.children : parents, target };
-    }
-    const arr = [], classes = [];
-    walk(ast, {
-        enter: (node) => {
-            if (!node.attributes)
-                return;
-            const classAttr = node.attributes.find(({ name }) => name.value === 'class');
-            if (!classAttr)
-                return;
-            const { arr, target } = findArr(parents, node);
-            const className = classAttr.value.value;
-            arr.push({
-                class: target && className.includes("__") ? className.replace(target.class, '&') : className,
-                node,
-                children: []
+    let node = parse(html);
+    ([node] = getUsefulChildNodes({ body: node }));
+    const hasClass = getNodeClass(node);
+    const usefulTags = getUsefulChildNodes(hasClass ? { body: [node] } : node);
+    return usefulTags.reduce((acc, node) => {
+        const parentClass = getNodeClass(node);
+        let childrenClasses = flat(getAllChildChildren(node)).map(getNodeClass).filter(Boolean);
+        if (!parentClass)
+            return acc;
+        if (!childrenClasses.length)
+            return acc + `.${parentClass}{\n`;
+        childrenClasses = childrenClasses.map((clazz) => clazz.includes("__") ? clazz : [clazz]);
+        const childrenParent = [[parentClass], ...childrenClasses.filter(Array.isArray)];
+        childrenClasses = childrenParent.map(([parentName]) => {
+            const targets = childrenClasses.filter((item) => {
+                if (Array.isArray(item))
+                    return false;
+                return item.includes(parentName);
             });
-            const childArr = classes[classes.length - 1];
-            const lastOneIsArr = Array.isArray(classes[classes.length - 1]);
-            const isChild = className.includes("__");
-            if (lastOneIsArr && isChild)
-                return childArr.push(formatChildClass(className));
-            if (isChild)
-                return classes.push([formatChildClass(className)]);
-            classes.push(className);
-        }
-    });
-    const classTxtArr = [];
-    classes.forEach((clazz) => {
-        const isChild = Array.isArray(clazz);
-        if (!isChild) {
-            classTxtArr.push(`.${clazz}{`);
-            return classTxtArr.push("}");
-        }
-        clazz.forEach((childClazz) => classTxtArr.splice(classTxtArr.length - 1, 0, `${childClazz}{}`));
-    });
-    return classTxtArr.join("\n");
+            return [parentName, ...targets];
+        }).filter(Boolean);
+        let [firstClasses, ...restClasses] = childrenClasses;
+        firstClasses = flat(firstClasses.concat(restClasses.filter((x) => x.length === 1)));
+        restClasses = restClasses.filter((x) => x.length > 1);
+        const combineLogic = (acc, item, idx) => {
+            let [scopeName, clazzName] = item.split("__");
+            const hasUnderLine = !!clazzName;
+            clazzName = idx ? (clazzName || scopeName) : item;
+            return acc + (idx ? (hasUnderLine ? `&__${clazzName}{}\n` : `.${scopeName}{\n}\n`) : `.${item}{\n`);
+        };
+        const totalClassStr = firstClasses.reduce(combineLogic, '');
+        const restClassStr = restClasses.reduce((acc, arr) => acc + arr.reduce(combineLogic, '') + '\n}\n', '');
+        const fullStr = totalClassStr + restClassStr + '\n}\n';
+        return acc + fullStr;
+    }, '');
 }
 class CssGen {
     constructor() {
-        electron_1.globalShortcut.register('CommandOrControl+1', () => {
+        electron_1.globalShortcut.register('CommandOrControl+5', () => {
             robot.keyTap('c', 'command');
             setTimeout(() => {
                 const cssStr = cssGenPlugins(electron_1.clipboard.readText());
