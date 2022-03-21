@@ -64,7 +64,7 @@ function cssGenPlugins(html) {
     const usefulTags = getUsefulChildNodes(hasClass ? { body: [node] } : node);
     return usefulTags.reduce((acc, node) => {
         const parentClass = getNodeClass(node);
-        let childrenClasses = flat(getAllChildChildren(node)).map(getNodeClass).filter(Boolean);
+        let childrenClasses = [...new Set(flat(getAllChildChildren(node)).map(getNodeClass).filter(Boolean))];
         if (!parentClass)
             return acc;
         if (!childrenClasses.length)
@@ -96,7 +96,7 @@ function cssGenPlugins(html) {
 }
 class CssGen {
     constructor() {
-        electron_1.globalShortcut.register('CommandOrControl+5', () => {
+        electron_1.globalShortcut.register('CommandOrControl+1', () => {
             robot.keyTap('c', 'command');
             setTimeout(() => {
                 const cssStr = cssGenPlugins(electron_1.clipboard.readText());

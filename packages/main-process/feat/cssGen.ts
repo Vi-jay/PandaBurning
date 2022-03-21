@@ -39,7 +39,7 @@ function cssGenPlugins(html) {
     const usefulTags = getUsefulChildNodes(hasClass ? {body: [node]} : node);
     return usefulTags.reduce((acc, node) => {
         const parentClass = getNodeClass(node);
-        let childrenClasses = flat(getAllChildChildren(node)).map(getNodeClass).filter(Boolean);
+        let childrenClasses:any[] = [...new Set(flat(getAllChildChildren(node)).map(getNodeClass).filter(Boolean))];
         if (!parentClass) return acc;
         if (!childrenClasses.length) return acc + `.${parentClass}{\n`;
         childrenClasses = childrenClasses.map((clazz) => clazz.includes("__") ? clazz : [clazz]);
@@ -69,7 +69,7 @@ function cssGenPlugins(html) {
 
 export class CssGen {
     constructor() {
-        globalShortcut.register('CommandOrControl+5', () => {
+        globalShortcut.register('CommandOrControl+1', () => {
             robot.keyTap('c', 'command');
             setTimeout(() => {
                 const cssStr = cssGenPlugins(clipboard.readText());
