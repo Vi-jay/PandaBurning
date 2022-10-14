@@ -29,13 +29,16 @@ function getUsefulChildNodes(node) {
     return node.body.filter(({ type }) => type === 'Tag');
 }
 function getNodeClass(node) {
-    if (!node.attributes)
+    if (!node || !node.attributes)
         return;
     const target = node.attributes.find(({ name }) => name.value === 'className');
     if (!target)
         return;
-    console.log(target.value.value.replace(/\{styles\["(.*)"]}/, "$1"));
-    return target.value.value.replace(/\{styles\["(.*)"]}/, "$1");
+    const targetClassName = target.value.value.replace(/\{styles\.(.*)}/, "$1");
+    return targetClassName;
+    // if (!targetClassName.includes("__"))return paramCase(targetClassName);
+    // const [tstart,tend] = targetClassName.split("__");
+    // return `${paramCase(tstart)}__${tend}`;
 }
 function getAllChildChildren(node) {
     const children = getUsefulChildNodes(node);

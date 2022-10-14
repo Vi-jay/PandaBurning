@@ -1,28 +1,47 @@
 const {parse} = require("html5parser");
 import {app, BrowserWindow, globalShortcut, clipboard, dialog, Tray, Menu, ipcMain, remote} from "electron";
 import * as robot from "robotjs";
-
+import {
+    camelCase,
+    capitalCase,
+    constantCase,
+    dotCase,
+    headerCase,
+    noCase,
+    paramCase,
+    pascalCase,
+    pathCase,
+    sentenceCase,
+    snakeCase,
+} from "change-case";
 function getUsefulChildNodes(node) {
     if (!Array.isArray(node.body)) return [];
     return node.body.filter(({type}) => type === 'Tag');
 }
+
 function getNodeClass(node) {
-    if (!node.attributes) return;
+    if (!node || !node.attributes) return;
     const target = node.attributes.find(({name}) => name.value === 'className');
     if (!target) return;
-    console.log(target.value.value.replace(/\{styles\["(.*)"]}/,"$1"))
-    return target.value.value.replace(/\{styles\["(.*)"]}/,"$1")
+    const targetClassName = target.value.value.replace(/\{styles\.(.*)}/, "$1");
+    return targetClassName;
+    // if (!targetClassName.includes("__"))return paramCase(targetClassName);
+    // const [tstart,tend] = targetClassName.split("__");
+    // return `${paramCase(tstart)}__${tend}`;
 }
+
 function getAllChildChildren(node) {
     const children = getUsefulChildNodes(node);
     return children.reduce((acc, cur) => {
         return acc.concat(getUsefulChildNodes(cur).length ? [cur, ...getAllChildChildren(cur)] : cur);
     }, [])
 }
+
 function flat(arr = [], depth = Infinity) {
     if (depth <= 0) return arr;
     return arr.reduce((acc, cur) => acc.concat(Array.isArray(cur) && depth > 1 ? flat(cur, depth - 1) : cur), [])
 }
+
 /***
  * 把每个父节点和其子节点所有class提取出来 放到一起
  * 然后遍历子节点 是否有__
@@ -40,7 +59,7 @@ function cssGenPlugins(html) {
     const usefulTags = getUsefulChildNodes(hasClass ? {body: [node]} : node);
     return usefulTags.reduce((acc, node) => {
         const parentClass = getNodeClass(node);
-        let childrenClasses:any[] = [...new Set(flat(getAllChildChildren(node)).map(getNodeClass).filter(Boolean))];
+        let childrenClasses: any[] = [...new Set(flat(getAllChildChildren(node)).map(getNodeClass).filter(Boolean))];
         if (!parentClass) return acc;
         if (!childrenClasses.length) return acc + `.${parentClass}{\n`;
         childrenClasses = childrenClasses.map((clazz) => clazz.includes("__") ? clazz : [clazz]);
