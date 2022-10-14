@@ -5,13 +5,11 @@
   "author": "",
   "main": "packages/main-process/index.js",
   "scripts": {
-    "postinstall": "patch-package && electron-builder install-app-deps",
+    "postinstall": "patch-package",
     "dev": "cross-env NODE_ENV=development  tsc-watch --noClear -p .electron --onSuccess \"node .electron/restart.js\"",
     "build": "cross-env NODE_ENV=production tsc  -p .electron  &&   vite build  && electron-builder --dir",
     "buildprod": "cross-env NODE_ENV=production tsc  -p .electron &&   vite build  && electron-builder",
     "serve": "vite preview"
-
-
   },
   "bin": {
     "evv": "script/evv.js"

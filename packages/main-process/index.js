@@ -8,6 +8,7 @@ const tomato_1 = require("./feat/tomato");
 const pathUtils_1 = __importDefault(require("./utils/pathUtils"));
 const cssGen_1 = require("./feat/cssGen");
 const json2ts_1 = require("./feat/json2ts");
+const vueFileGen_1 = require("./feat/vueFileGen");
 //全局引用防止对象被回收
 const plugins = {};
 let tray = null;
@@ -16,7 +17,7 @@ function initPlugins() {
     plugins.tomatoPlugin = new tomato_1.TomatoPlugin(tray);
     plugins.cssGenPlugin = new cssGen_1.CssGen();
     plugins.json2tsPlugin = new json2ts_1.Json2ts();
-    // plugins.vueFileGenPlugin = new VueFileGen();
+    plugins.vueFileGenPlugin = new vueFileGen_1.VueFileGen();
 }
 electron_1.app.whenReady().then(() => {
     // initUpdateHandler(plugins);
