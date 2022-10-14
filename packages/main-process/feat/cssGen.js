@@ -31,10 +31,11 @@ function getUsefulChildNodes(node) {
 function getNodeClass(node) {
     if (!node.attributes)
         return;
-    const target = node.attributes.find(({ name }) => name.value === 'class');
+    const target = node.attributes.find(({ name }) => name.value === 'className');
     if (!target)
         return;
-    return target.value.value;
+    console.log(target.value.value.replace(/\{styles\["(.*)"]}/, "$1"));
+    return target.value.value.replace(/\{styles\["(.*)"]}/, "$1");
 }
 function getAllChildChildren(node) {
     const children = getUsefulChildNodes(node);

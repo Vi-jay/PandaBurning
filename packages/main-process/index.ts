@@ -17,7 +17,7 @@ function initPlugins() {
     plugins.tomatoPlugin = new TomatoPlugin(tray);
     plugins.cssGenPlugin = new CssGen();
     plugins.json2tsPlugin = new Json2ts();
-    plugins.vueFileGenPlugin = new VueFileGen();
+    // plugins.vueFileGenPlugin = new VueFileGen();
 }
 
 app.whenReady().then(() => {
