@@ -20,6 +20,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VueFileGen = void 0;
+const fs = __importStar(require("fs"));
 const plist = require('plist');
 const electron_1 = require("electron");
 const robot = __importStar(require("robotjs"));
@@ -28,7 +29,8 @@ class VueFileGen {
         electron_1.globalShortcut.register('CommandOrControl+3', () => {
             robot.keyTap('c', 'command');
             setTimeout(() => {
-                console.log(plist.parse(electron_1.clipboard.read('NSFilenamesPboardType'))[0]);
+                const fullPath = plist.parse(electron_1.clipboard.read('NSFilenamesPboardType'))[0];
+                const file = fs.readFileSync(fullPath);
                 //    TODO
                 // 获取选中文件路径，直接弹出表单，按不同需求自动生成组件，例如弹窗，小模块等等
                 // Electron获取复制文件的绝对路径，然后根据文件名在指定目录创建文件，并导入到当前文件
