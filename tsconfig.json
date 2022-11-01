@@ -17,6 +17,7 @@
     ],
     "types": [
       "vite/client",
+      "electron",
       "@types/node"
     ],
     "baseUrl": ".",

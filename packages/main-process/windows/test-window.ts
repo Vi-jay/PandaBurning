@@ -1,13 +1,14 @@
 import {resolve} from "path";
 import {app, BrowserWindow, globalShortcut, clipboard, dialog, Tray, Menu, ipcMain, remote} from "electron";
+import {IS_DEV} from "../config/properties";
 
 export function createTestWindow() {
     const curWindow = new BrowserWindow({
-        width: 1280,
-        height: 700,
+        width: IS_DEV ? 1000 : 160,
+        height: IS_DEV ? 500 : 220,
         titleBarStyle: "hidden",
         center: true,
-        show: true,
+        show: false,
         frame: false,
         useContentSize: true,
         vibrancy: 'hud',  // 'light', 'medium-light' etc
@@ -25,7 +26,7 @@ export function createTestWindow() {
     //禁止关闭窗口 关闭时自动隐藏 始终保持只有一个番茄窗口
     curWindow.on('close', event => {
         curWindow.isVisible() && event.preventDefault();
-        // curWindow.hide();
+        curWindow.hide();
     })
     const nav2Page = () => curWindow.webContents.send("router", "test");
     if (process.env.NODE_ENV === 'development') {
@@ -40,4 +41,5 @@ export function createTestWindow() {
             nav2Page();
         });
     }
+    return curWindow;
 }
