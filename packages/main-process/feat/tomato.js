@@ -108,6 +108,7 @@ class TomatoPlugin {
                 }
             }
         ]);
+        setTimeout(() => tray["extraMenus"].forEach((item) => contextMenu.append(item)), 1000);
         tray.on("click", (e, bound) => {
             eventBoundPosition = bound;
             tray.setContextMenu(null); //单击时只显示窗口 不显示菜单

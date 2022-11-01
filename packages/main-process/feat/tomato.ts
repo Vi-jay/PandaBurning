@@ -10,17 +10,20 @@ export class TomatoPlugin {
     intervalTimer: any = null;
     leftSec: number = TOMATO__SEC;
     tomatoWin: BrowserWindow;
+
     constructor(tray) {
         this.tray = tray;
         this.initTray(tray);
         this.setupTomatoWindow();
         powerMonitor.on("unlock-screen", () => this.startLockTimer())
     }
+
     closeTomatoWindow() {
         const tomatoWin = this.tomatoWin;
         this.tomatoWin = null;
         tomatoWin && tomatoWin.close()
     }
+
     setupTomatoWindow(position: { x: number, y: number } = {x: 0, y: 0}): void {
         let tomatoWin = this.tomatoWin;
         if (tomatoWin) {
@@ -71,6 +74,7 @@ export class TomatoPlugin {
             tomatoWin.loadFile(resolve(__dirname, '../../render-build/index.html')).then(() => 1);
         }
     }
+
     initTray(tray: Tray) {
         let eventBoundPosition;
         const resetTomato = (...args) => {
@@ -87,6 +91,7 @@ export class TomatoPlugin {
                 }
             }
         ]);
+        setTimeout(() => tray["extraMenus"].forEach((item) => contextMenu.append(item)),1000);
         tray.on("click", (e, bound) => {
             eventBoundPosition = bound;
             tray.setContextMenu(null);//单击时只显示窗口 不显示菜单
@@ -97,6 +102,7 @@ export class TomatoPlugin {
             tray.popUpContextMenu(contextMenu);
         });
     }
+
     startLockTimer() {
         const tomatoWin = this.tomatoWin;
         clearTimeout(this.resetTimer);
