@@ -4,14 +4,14 @@ import {resolve} from "path";
 import {IS_DEV, TOMATO__SEC} from "../config/properties";
 import {execSync} from "child_process"
 import axios from "axios";
-import {createTestWindow} from "../windows/test-window";
+import {createStockWindow} from "../windows/create-stock-window";
 
 export class StockPlugin {
     timer: any = null;
     win!: BrowserWindow ;
 
     constructor(tray) {
-        this.win = createTestWindow();
+        this.win = createStockWindow();
         this.initTray(tray);
     }
 

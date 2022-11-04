@@ -2,7 +2,7 @@ import {resolve} from "path";
 import {app, BrowserWindow, globalShortcut, clipboard, dialog, Tray, Menu, ipcMain, remote} from "electron";
 import {IS_DEV} from "../config/properties";
 
-export function createTestWindow() {
+export function createStockWindow() {
     const curWindow = new BrowserWindow({
         width: IS_DEV ? 1000 : 160,
         height: IS_DEV ? 500 : 220,
