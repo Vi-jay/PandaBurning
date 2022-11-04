@@ -3,10 +3,10 @@
   "version": "0.0.2",
   "description": "",
   "author": "",
-  "main": "packages/main-process/index.js",
+  "main": "packages/main-process-build/index.js",
   "scripts": {
     "postinstall": "patch-package",
-    "dev": "cross-env NODE_ENV=development  tsc-watch --noClear -p .electron --onSuccess \"node .electron/restart.js\"",
+    "dev": "cross-env NODE_ENV=development  tsc-watch --outDir packages/main-process-build --noClear -p .electron --onSuccess \"node .electron/restart.js\"",
     "build": "cross-env NODE_ENV=production tsc  -p .electron  &&   vite build  && electron-builder --dir",
     "buildprod": "cross-env NODE_ENV=production tsc  -p .electron &&   vite build  && electron-builder",
     "serve": "vite preview"

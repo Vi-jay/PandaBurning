@@ -7,7 +7,6 @@ import {CssGen} from "./feat/cssGen";
 import {Json2ts} from "./feat/json2ts";
 import {VueFileGen} from "./feat/vueFileGen";
 
-
 //全局引用防止对象被回收
 const plugins: Record<string, any> = {};
 let tray = null as Tray;
