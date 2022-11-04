@@ -3,8 +3,7 @@ dist/electron/*
 dist/web/*
 build/*
 packages/render-build/*
-packages/preload/**/*.js
-packages/main/**/*.js
+packages/main-process-build/*
 !build/icons
 node_modules/
 npm-debug.log
